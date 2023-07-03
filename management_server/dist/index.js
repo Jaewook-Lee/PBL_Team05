@@ -4,13 +4,28 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const dbConnector_1 = __importDefault(require("./dbConnector"));
+const mysql_1 = __importDefault(require("mysql"));
 const port = 8000;
+//db 연결
+const connection = mysql_1.default.createConnection({
+    host: 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
+    port: 3306,
+    user: 'dbmasteruser',
+    password: '00000000',
+    database: 'dbmaster'
+});
+connection.connect((error) => {
+    if (error) {
+        console.error('연결실패', error);
+        return;
+    }
+    console.log('연결성공');
+});
 const app = (0, express_1.default)();
 app.use(express_1.default.static('.')); //????어따쓰는거지
 //db 연결 잘되나 확인하는 url
 app.get('/dbTest', (req, res) => {
-    dbConnector_1.default.query('SELECT * From Test', (error, result) => {
+    connection.query('SELECT * From Test', (error, result) => {
         if (error) {
             console.error('쿼리 실행 실패:', error);
             return;

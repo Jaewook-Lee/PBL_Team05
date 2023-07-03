@@ -1,9 +1,27 @@
 import express, {Express, Request, Response} from "express";
 import bodyParser from 'body-parser';
 import mysql from 'mysql';
-import  connection  from "./dbConnector";
 
 const port = 8000;
+
+//db 연결
+const connection : mysql.Connection = mysql.createConnection({
+    host : 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
+    port : 3306,
+    user : 'dbmasteruser',
+    password : '00000000',
+    database : 'dbmaster'
+});
+
+connection.connect ((error)=>{
+    if (error){
+        console.error('연결실패',error);
+        return;
+    }
+    console.log('연결성공')
+})
+
+
 
 const app: Express = express();
 app.use(express.static('.')) //????어따쓰는거지
