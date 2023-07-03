@@ -19,7 +19,7 @@ connection.connect ((error)=>{
         return;
     }
     console.log('연결성공')
-})
+});
 
 
 
