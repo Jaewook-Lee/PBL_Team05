@@ -23,7 +23,7 @@ connection.connect ((error)=>{
 
 const app: Express = express();
 
-app.use(express.static('.')) //????어따쓰는거지
+app.use(express.static('.')) //url로 직접 사진에 접속할때 필요한 코드 "localhost:8000/pic1.jpeg"
 app.use(express.json());
 app.use('/AD', adRoutes);
 

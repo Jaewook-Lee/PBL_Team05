@@ -23,7 +23,7 @@ connection.connect((error) => {
     console.log('db connect success');
 });
 const app = (0, express_1.default)();
-app.use(express_1.default.static('.')); //????어따쓰는거지
+app.use(express_1.default.static('.')); //url로 직접 사진에 접속할때 필요한 코드 "localhost:8000/pic1.jpeg"
 app.use(express_1.default.json());
 app.use('/AD', ad_1.default);
 //db 연결 잘되나 확인하는 url
