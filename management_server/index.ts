@@ -50,6 +50,49 @@ app.get('/',(req : Request, res : Response)=>{
 
 
 
+/* 이하 테스트를 위한 더미 코드 */
+app.get('/test/requestList',(req : Request, res : Response)=>{
+    res.json({stauts: "success",
+            data : [{content: "pic1.jpeg",width : "requestList"}]
+    });
+});
+
+
+app.get('/test/readAd',(req : Request, res : Response)=>{
+    res.send({stauts: "success",
+    data : [{content: "pic1.jpeg",width : "readAd"}]
+})
+});
+
+app.delete('/test/deleteAd',(req : Request, res : Response)=>{
+    res.json({stauts: "success", message : ""});
+});
+
+app.put('/test/createAd',(req : Request, res : Response)=>{
+    res.json({
+        status: "success",
+        message: "등록에 성공했습니다.",
+        adId: "0000"
+    });
+});
+
+app.post('/test/activeAd',(req : Request, res : Response)=>{
+    res.json({
+        status: "success",
+        message: "active Success!"
+    });
+});
+
+app.post('/test/createAd',(req : Request, res : Response)=>{
+    res.send({
+        status : "success",
+        message: "등록에 성공했습니다",
+        adId: "0000"
+    });
+});
+/* ********************** */
+
+
 
 app.listen(port, ()=>{
     console.log(`listening on port ${port}` )
