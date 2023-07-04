@@ -39,6 +39,7 @@ function deleteAd (req: Request, res: Response) {
             }
         }
     );
+
 }
 
 // db및 api 수정필요.
@@ -144,6 +145,7 @@ function requestList (req: Request, res: Response) {
             res.json(result);
         }
     });
+
 }
 
 export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList }
