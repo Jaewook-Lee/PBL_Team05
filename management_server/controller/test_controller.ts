@@ -19,7 +19,7 @@ connection.connect ((error)=>{
 
 
 function requestList (req: Request, res: Response) {
-    res.json({"stauts": "success",
+    res.json({stauts: "success",
             data : [{content: "pic1.jpeg",width : "requestList"}]
     });
 }
