@@ -1,4 +1,24 @@
 import { Request, Response } from 'express';
+import mysql from 'mysql';
+
+const connection : mysql.Connection = mysql.createConnection({
+    host : 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
+    port : 3306,
+    user : 'dbmasteruser',
+    password : '00000000',
+    database : 'ad_management_platform_server'
+});
+
+connection.connect ((error)=>{
+    if (error){
+        console.error('fail to connect',error);
+        return;
+    }
+    console.log('db connect success')
+});
+
+
+
 
 function deleteAd (req: Request, res: Response) {
     res.json({
@@ -17,13 +37,30 @@ function readAd (req: Request, res: Response) {
     })
 }
 
-function createAd (req: Request, res: Response) {
-    res.json({
-        "status": "success",
-        "message": "등록에 성공했습니다.",
-        "adId": "0000"
-    });
+
+function createAd(req: Request, res: Response){
+    console.log(req.body);
+    
+    connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
+    values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${req.body.country}","${req.body.gender}","${req.body.periodBegin}",
+    "${req.body.periodEnd}","${req.body.maxViewCount}")`,
+    function(err : Error){
+        if(err){
+            res.json({
+                "status": "fail",
+                "message": "등록에 실패했습니다.",
+            });
+        }
+        res.json({
+            "status": "success",
+            "message": "등록에 성공했습니다.",
+            "adId": "0000"
+        });
+    }
+    );
 }
+
+
 
 function activeAd (req: Request, res: Response) {
     res.json({

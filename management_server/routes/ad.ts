@@ -10,7 +10,7 @@ router.get('/readAd', readAd);
 
 router.delete('/deleteAd', deleteAd);
 
-router.put('/createAd', createAd);
+router.post('/createAd', createAd);
 
 router.post('/activeAd', activeAd);
 

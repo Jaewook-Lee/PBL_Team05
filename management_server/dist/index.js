@@ -6,8 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const mysql_1 = __importDefault(require("mysql"));
 const ad_1 = __importDefault(require("./routes/ad"));
-// const port = 8000;
-const port = 8001; // For local testing
+const port = 8000;
 //db connector
 const connection = mysql_1.default.createConnection({
     host: 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
