@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import mysql from 'mysql';
+import iso from 'iso-3166-1';
 
 //db connector
 const connection : mysql.Connection = mysql.createConnection({
@@ -37,21 +38,28 @@ function readAd (req: Request, res: Response) {
 }
 
 function createAd (req: Request, res: Response) {
-    const httpMethod : string = req.method;
     const params = req.body;
-    if (httpMethod === "POST") {
-        if (params.name === undefined || params.advertizer === undefined || params.createdAt === undefined || params.country === undefined || params.gender === undefined || params.periodBegin === undefined || params.periodEnd === undefined || params.maxViewCount === undefined) {
-            res.json({
-                "status": "fail",
-                "message": "잘못된 데이터가 입력되었습니다."
-            })
-        }
-        else {
 
-        }
+    // Validation
+    if (params.name === undefined || params.advertizer === undefined || params.createdAt === undefined || params.country === undefined || params.gender === undefined || params.periodBegin === undefined || params.periodEnd === undefined || params.maxViewCount === undefined) {
+        res.json({
+            "status": "fail",
+            "message": "잘못된 데이터가 입력되었습니다."
+        })
     }
-    else {    // httpMethod === "PUT"
+    else {
+        // Parsing country code
+        const countryName = params.country;
+        const isoAllData = iso.all();
+        let countryCode : Number = -1;
+        for (let i = 0; i < isoAllData.length; i++) {
+            if (countryName === isoAllData[i].country) {
+                countryCode = Number(isoAllData[i].numeric);
+                break;
+            }
+        }
 
+        // Parsing gender(Bit-masking)
     }
 
     res.json({
