@@ -1,10 +1,60 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteAd = void 0;
+exports.requestList = exports.uploadContents = exports.updateAd = exports.activeAd = exports.createAd = exports.readAd = exports.deleteAd = void 0;
 function deleteAd(req, res) {
-    return res.json({
+    res.json({
         "status": "success",
         "message": ""
     });
 }
 exports.deleteAd = deleteAd;
+function readAd(req, res) {
+    res.json({
+        "stauts": "success",
+        "data": [{
+                "content": "pic1.jpeg",
+                "width": "ssssss"
+            }]
+    });
+}
+exports.readAd = readAd;
+function createAd(req, res) {
+    res.json({
+        "status": "success",
+        "message": "등록에 성공했습니다.",
+        "adId": "0000"
+    });
+}
+exports.createAd = createAd;
+function activeAd(req, res) {
+    res.json({
+        "status": "success",
+        "message": "active Success!"
+    });
+}
+exports.activeAd = activeAd;
+function updateAd(req, res) {
+    res.json({
+        "status": "success",
+        "message": "업데이트에 성공했습니다",
+        "adId": "0000"
+    });
+}
+exports.updateAd = updateAd;
+function uploadContents(req, res) {
+    res.json({
+        "status": "success",
+        "message": "업로드에 성공했습니다."
+    });
+}
+exports.uploadContents = uploadContents;
+function requestList(req, res) {
+    res.json({
+        "stauts": "success",
+        "data": [{
+                "content": "pic1.jpeg",
+                "width": "dddddd"
+            }]
+    });
+}
+exports.requestList = requestList;

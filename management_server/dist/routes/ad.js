@@ -3,43 +3,11 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
 const ad_controller_1 = require("../controller/ad_controller");
 const router = (0, express_1.Router)();
-// 이건 user가 list를 달라고 하는건데 더미코드가 필요해 여기 있는것
-router.get('/requestList', (req, res) => {
-    res.json({ "stauts": "success",
-        "data": [{ "content": "pic1.jpeg", "width": "dddddd" }]
-    });
-});
-router.get('/readAd', (req, res) => {
-    res.send({ "stauts": "success",
-        "data": [{ "content": "pic1.jpeg", "width": "ssssss" }]
-    });
-});
+router.get('/requestList', ad_controller_1.requestList); // 이건 user가 list를 달라고 하는건데 더미코드가 필요해 여기 있는것
+router.get('/readAd', ad_controller_1.readAd);
 router.delete('/deleteAd', ad_controller_1.deleteAd);
-router.put('/createAd', (req, res) => {
-    res.json({
-        "status": "success",
-        "message": "등록에 성공했습니다.",
-        "adId": "0000"
-    });
-});
-router.post('/activeAd', (req, res) => {
-    res.json({
-        "status": "success",
-        "message": "active Success!"
-    });
-});
-router.post('/updateAd', (req, res) => {
-    res.send({
-        "status": "success",
-        "message": "업데이트에 성공했습니다",
-        "adId": "0000"
-    });
-});
-//광고의 contents를 upload
-router.post('/uploadContens', (req, res) => {
-    res.send({
-        "status": "success",
-        "message": "업로드에 성공했습니다."
-    });
-});
+router.put('/createAd', ad_controller_1.createAd);
+router.post('/activeAd', ad_controller_1.activeAd);
+router.post('/updateAd', ad_controller_1.updateAd);
+router.post('/uploadContents', ad_controller_1.uploadContents); //광고의 contents를 upload
 exports.default = router;
