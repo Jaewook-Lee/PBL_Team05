@@ -32,8 +32,11 @@ app.get('/dbTest',(req : Request, res : Response)=>{
     connection.query('SELECT * From Test', (error, result)=>{
         if (error){
             console.error('쿼리 실행 실패:', error);
+        
             return
+            
         }
+        console.log(result);
         res.json(result);
     });
 });

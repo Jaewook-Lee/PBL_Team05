@@ -33,6 +33,7 @@ app.get('/dbTest', (req, res) => {
             console.error('쿼리 실행 실패:', error);
             return;
         }
+        console.log(result);
         res.json(result);
     });
 });

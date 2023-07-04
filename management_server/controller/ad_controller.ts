@@ -21,10 +21,24 @@ connection.connect ((error)=>{
 
 
 function deleteAd (req: Request, res: Response) {
-    res.json({
-        "status": "success",
-        "message": ""
-    })
+    console.log(req.body);
+    connection.query(`delete from ads where id = "${req.body.adId}"`,
+        function(err : Error){
+            if(err){
+                //todo : id가 없을 경우 삭제를 안하는데 성공으로 메시지가 전달되긴 함.
+                res.json({
+                    "status": "fail",
+                    "message": "삭제에 실패했습니다.",
+                });
+                console.log(err)
+            }else{
+                res.json({
+                    "status": "success",
+                    "message": "삭제에 성공했습니다.",
+                });
+            }
+        }
+    );
 }
 
 function readAd (req: Request, res: Response) {
@@ -40,7 +54,7 @@ function readAd (req: Request, res: Response) {
 
 function createAd(req: Request, res: Response){
     console.log(req.body);
-    
+
     connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
     values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${req.body.country}","${req.body.gender}","${req.body.periodBegin}",
     "${req.body.periodEnd}","${req.body.maxViewCount}")`,
@@ -63,10 +77,10 @@ function createAd(req: Request, res: Response){
 
 
 function activeAd (req: Request, res: Response) {
-    res.json({
+    res.json(JSON.stringify({
         "status": "success",
         "message": "active Success!"
-    });
+    }));
 }
 
 function updateAd (req: Request, res: Response) {

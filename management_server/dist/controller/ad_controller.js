@@ -20,9 +20,22 @@ connection.connect((error) => {
     console.log('db connect success');
 });
 function deleteAd(req, res) {
-    res.json({
-        "status": "success",
-        "message": ""
+    console.log(req.body);
+    connection.query(`delete from ads where id = "${req.body.adId}"`, function (err) {
+        if (err) {
+            //todo : id가 없을 경우 삭제를 안하는데 성공으로 메시지가 전달되긴 함.
+            res.json({
+                "status": "fail",
+                "message": "삭제에 실패했습니다.",
+            });
+            console.log(err);
+        }
+        else {
+            res.json({
+                "status": "success",
+                "message": "삭제에 성공했습니다.",
+            });
+        }
     });
 }
 exports.deleteAd = deleteAd;
@@ -56,10 +69,10 @@ function createAd(req, res) {
 }
 exports.createAd = createAd;
 function activeAd(req, res) {
-    res.json({
+    res.json(JSON.stringify({
         "status": "success",
         "message": "active Success!"
-    });
+    }));
 }
 exports.activeAd = activeAd;
 function updateAd(req, res) {
