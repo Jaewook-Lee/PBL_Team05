@@ -1,4 +1,10 @@
+import { Fetch } from "./Fetch";
 import css from "./index.css";
 css;
 
-console.log("Hello World");
+async function main(): Promise<void> {
+    const respose = await Fetch.requestList("", "");
+    console.log(respose);
+}
+
+main();
