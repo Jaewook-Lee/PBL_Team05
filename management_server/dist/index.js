@@ -35,6 +35,7 @@ app.get('/dbTest', (req, res) => {
             console.error('쿼리 실행 실패:', error);
             return;
         }
+        console.log(result);
         res.json(result);
     });
 });
@@ -43,6 +44,41 @@ app.get('/', (req, res) => {
     const photoPath = 'pic1.jpeg';
     res.sendFile(photoPath, { root: '.' }); // root 잘 확인해야될듯
 });
+/* 이하 테스트를 위한 더미 코드 */
+app.get('/test/requestList', (req, res) => {
+    res.json({ stauts: "success",
+        data: [{ content: "pic1.jpeg", width: "requestList" }]
+    });
+});
+app.get('/test/readAd', (req, res) => {
+    res.send({ stauts: "success",
+        data: [{ content: "pic1.jpeg", width: "readAd" }]
+    });
+});
+app.delete('/test/deleteAd', (req, res) => {
+    res.json({ stauts: "success", message: "" });
+});
+app.put('/test/createAd', (req, res) => {
+    res.json({
+        status: "success",
+        message: "등록에 성공했습니다.",
+        adId: "0000"
+    });
+});
+app.post('/test/activeAd', (req, res) => {
+    res.json({
+        status: "success",
+        message: "active Success!"
+    });
+});
+app.post('/test/createAd', (req, res) => {
+    res.send({
+        status: "success",
+        message: "등록에 성공했습니다",
+        adId: "0000"
+    });
+});
+/* ********************** */
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
 });

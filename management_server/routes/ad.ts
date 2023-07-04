@@ -10,11 +10,11 @@ router.get('/readAd', readAd);
 
 router.delete('/deleteAd', deleteAd);
 
-router.put('/createAd', createAd);
+router.post('/createAd', createAd);
 
 router.post('/activeAd', activeAd);
 
-router.post('/updateAd', updateAd);
+router.put('/updateAd', updateAd);
 
 router.post('/uploadContents', uploadContents);    //광고의 contents를 upload
 
