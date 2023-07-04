@@ -20,7 +20,7 @@ connection.connect((error) => {
     console.log('db connect success');
 });
 function requestList(req, res) {
-    res.json({ stauts: "success",
+    res.json({ "stauts": "success",
         data: [{ content: "pic1.jpeg", width: "requestList" }]
     });
 }
