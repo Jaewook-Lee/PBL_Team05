@@ -1,4 +1,5 @@
 import { Router,Request,Response } from "express";
+import { deleteAd } from "../controller/ad_controller";
 
 
 const router : Router = Router();
@@ -17,9 +18,7 @@ router.get('/readAd',(req : Request, res : Response)=>{
 })
 });
 
-router.delete('/deleteAd',(req : Request, res : Response)=>{
-    res.json({"stauts": "success", "message" : ""});
-});
+router.delete('/deleteAd', deleteAd);
 
 router.put('/createAd',(req : Request, res : Response)=>{
     res.json({

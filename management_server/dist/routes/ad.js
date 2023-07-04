@@ -1,6 +1,7 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = require("express");
+const ad_controller_1 = require("../controller/ad_controller");
 const router = (0, express_1.Router)();
 // 이건 user가 list를 달라고 하는건데 더미코드가 필요해 여기 있는것
 router.get('/requestList', (req, res) => {
@@ -13,9 +14,7 @@ router.get('/readAd', (req, res) => {
         "data": [{ "content": "pic1.jpeg", "width": "ssssss" }]
     });
 });
-router.delete('/deleteAd', (req, res) => {
-    res.json({ "stauts": "success", "message": "" });
-});
+router.delete('/deleteAd', ad_controller_1.deleteAd);
 router.put('/createAd', (req, res) => {
     res.json({
         "status": "success",
