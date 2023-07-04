@@ -8,6 +8,6 @@ router.get('/readAd', ad_controller_1.readAd);
 router.delete('/deleteAd', ad_controller_1.deleteAd);
 router.put('/createAd', ad_controller_1.createAd);
 router.post('/activeAd', ad_controller_1.activeAd);
-router.post('/updateAd', ad_controller_1.updateAd);
 router.post('/uploadContents', ad_controller_1.uploadContents); //광고의 contents를 upload
+router.post('/createAd', ad_controller_1.createAd);
 exports.default = router;
