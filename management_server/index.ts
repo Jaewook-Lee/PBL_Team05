@@ -10,7 +10,7 @@ const connection : mysql.Connection = mysql.createConnection({
     port : 3306,
     user : 'dbmasteruser',
     password : '00000000',
-    database : 'dbmaster'
+    database : 'ad_management_platform_server'
 });
 
 connection.connect ((error)=>{
@@ -66,6 +66,8 @@ app.get('/test/readAd',(req : Request, res : Response)=>{
 })
 });
 
+
+
 app.delete('/test/deleteAd',(req : Request, res : Response)=>{
     res.json({stauts: "success", message : ""});
 });
@@ -92,6 +94,46 @@ app.post('/test/createAd',(req : Request, res : Response)=>{
         adId: "0000"
     });
 });
+
+app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
+    var data :Object;
+    var count : number;
+    await new Promise<void>((resolve) => {
+        connection.query(`select id as adId, name as title, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+            }
+            data= result;
+            resolve();
+        })
+    });
+
+    await new Promise<void>((resolve) => {
+        connection.query(`select count(*) as adCount from ads`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+            }
+            count= result;
+            resolve();
+        })
+    });
+
+    console.log(data!);
+    console.log(count!);
+    res.json({adCount : count[0].adCount ,data : data!});
+    
+});
+
+
+
 /* ********************** */
 
 
