@@ -178,7 +178,7 @@ function uploadContents (req: Request, res: Response) {
 async function requestAdminList(req:Request, res:Response){
     var offset : number = Number(req.query.offset);
     var length : number = Number(req.query.length);
-
+    console.log(req);
     if(offset == undefined && length == undefined){
         res.json({status : "error", message : "필수 파라미터 (offset,length) Error"})
         return;
