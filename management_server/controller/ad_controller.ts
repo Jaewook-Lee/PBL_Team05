@@ -19,6 +19,44 @@ connection.connect ((error)=>{
     console.log('db connect success')
 });
 
+// ad 정렬해서 filtering하는 기능이 필요 할 듯.
+//get
+function requestList (req: Request, res: Response) {
+    connection.query(`select * from ads where gender = '${req.body.gender}' and country  = "${req.body.country}";`,function(err : Error, result : any){
+        if (err){
+            console.log(err);
+            res.json({
+                status: "fail",
+                message: "불러오기에 실패했습니다.."
+            });
+        }else{
+            res.json(result);
+        }
+    });
+
+}
+
+// db및 api 수정필요.
+//get
+function readAd (req: Request, res: Response) {
+    console.log(req.body);
+    connection.query(`select name as adName, period_begin, period_end, advertizer, country from ads where id = '${req.body.adId}' `,
+    function(err : Error, result : any){
+        if(err){
+            console.log(err)
+            // Todo : 빈 객체일 경우 실패 메시지 전달하도록 코드 작성해야될듯
+            res.json({
+                status : "fail",
+                message : "조회에 실패했습니다."
+            });
+        }else{
+            console.log(result);
+            res.json(result);
+        }
+    });
+}
+
+//delete
 function deleteAd (req: Request, res: Response) {
     console.log(req.body);
     connection.query(`delete from ads where id = "${req.body.adId}"`,
@@ -41,26 +79,9 @@ function deleteAd (req: Request, res: Response) {
 
 }
 
-// db및 api 수정필요.
-function readAd (req: Request, res: Response) {
-    console.log(req.body);
-    connection.query(`select name as adName, period_begin, period_end, advertizer, country from ads where id = '${req.body.adId}' `,
-    function(err : Error, result : any){
-        if(err){
-            console.log(err)
-            // Todo : 빈 객체일 경우 실패 메시지 전달하도록 코드 작성해야될듯
-            res.json({
-                status : "fail",
-                message : "조회에 실패했습니다."
-            });
-        }else{
-            console.log(result);
-            res.json(result);
-        }
-    });
-}
 
 
+//post
 function createAd(req: Request, res: Response){
     const params = req.body;
 
@@ -106,6 +127,7 @@ function createAd(req: Request, res: Response){
 }
 
 //deactivate도 필요할듯.
+//post
 function activeAd (req: Request, res: Response) {
     connection.query(`insert into active_ads (id) values (${req.body.adId});`,function (err){
         if(err){
@@ -123,6 +145,7 @@ function activeAd (req: Request, res: Response) {
     })
 }
 
+//put
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd (req: Request, res: Response) {
     console.log(req.body);
@@ -143,6 +166,7 @@ function updateAd (req: Request, res: Response) {
 }
 
 // file을 받는 tool 필요할듯.
+//post
 function uploadContents (req: Request, res: Response) {
     res.json({
         status: "success",
@@ -150,20 +174,9 @@ function uploadContents (req: Request, res: Response) {
     });
 }
 
-// ad 정렬해서 filtering하는 기능이 필요 할 듯.
-function requestList (req: Request, res: Response) {
-    connection.query(`select * from ads where gender = '${req.body.gender}' and country  = "${req.body.country}";`,function(err : Error, result : any){
-        if (err){
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "불러오기에 실패했습니다.."
-            });
-        }else{
-            res.json(result);
-        }
-    });
+//todo
+function requestAdminList(req:Request, res:Response){
 
 }
 
-export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList }
+export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList,requestAdminList}

@@ -53,6 +53,11 @@ app.get('/',(req : Request, res : Response)=>{
 
 
 /* 이하 테스트를 위한 더미 코드 */
+app.get('/test/requestList/', (req: Request, res: Response)=>{
+    res.json({stauts: "success",
+            data : [{content: "pic1.jpeg",width : "100",height :"100",slotId : "1234", exposureTime :"2023-11-11 15:00:00"}]
+    });
+});
 
 app.get('/test/readAd',(req : Request, res : Response)=>{
     res.send({stauts: "success",
@@ -93,7 +98,7 @@ app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
     var data :Object;
     var count : any = [];
     await new Promise<void>((resolve) => {
-        connection.query(`select id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`,
+        connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id`,
         function(err : Error, result : any){
             if(err){
                 console.log(err);
@@ -129,8 +134,6 @@ app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
 
 
 /* ********************** */
-
-
 
 app.listen(port, ()=>{
     console.log(`listening on port ${port}` )
