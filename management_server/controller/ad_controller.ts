@@ -83,29 +83,25 @@ function createAd(req: Request, res: Response){
             }
         }
 
-        // SQL Query to DB
-
-        console.log(req.body);
-
-    connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
-    values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${req.body.country}","${req.body.gender}","${req.body.periodBegin}",
-    "${req.body.periodEnd}","${req.body.maxViewCount}")`,
-    function(err : Error){
-            if(err){
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "등록에 실패했습니다."
-            });
-        }else{
-            res.json({
-            status: "success",
-                message: "등록에 성공했습니다.",
-                adId: ""
-            });
+        connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
+        values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
+        "${req.body.periodEnd}","${req.body.maxViewCount}")`,
+        function(err : Error) {
+            if(err) {
+                console.log(err);
+                res.json({
+                    status: "fail",
+                    message: "등록에 실패했습니다."
+                });
+            } else {
+                res.json({
+                    status: "success",
+                    message: "등록에 성공했습니다.",
+                    adId: ""
+                });
+            }
         }
-    }
-    );
+        );
     }
 }
 
