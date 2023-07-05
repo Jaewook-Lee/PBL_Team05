@@ -8,7 +8,6 @@
     "stripInternal": true,
     "noEmitOnError": true,
     "noImplicitAny": true,
-    "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitOverride": true,
     "noUnusedLocals": true,
