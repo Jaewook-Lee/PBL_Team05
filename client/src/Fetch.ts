@@ -61,16 +61,30 @@ export class Fetch {
 
     public static async requestAdminList(
         offset: number,
+        length: number
+    ): Promise<AdminAdList>;
+
+    public static async requestAdminList(
+        offset: number,
         length: number,
         searchWord: string,
         searchType: string
+    ): Promise<AdminAdList>;
+
+    public static async requestAdminList(
+        offset: number,
+        length: number,
+        searchWord?: string,
+        searchType?: string
     ): Promise<AdminAdList> {
         const query = new URLSearchParams({
             offset: offset.toString(),
-            length: length.toString(),
-            searchWord: searchWord,
-            searchType: searchType
+            length: length.toString()
         });
+        if (searchWord) {
+            query.append("searchWord", searchWord);
+            query.append("searchType", searchType!);
+        }
         const response = await fetch(`${this._entry}/AD/requestAdminList?${query}`, {
             method: "GET"
         });
