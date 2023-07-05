@@ -147,6 +147,9 @@
 
 
 
+
+
+
   <!-- ad test눌렀을때 뜨는 창-->
 
   <div id = "when_click_adtest">
@@ -156,7 +159,19 @@
           Target
         </div>
         <sl-dropdown>
+          <sl-button id="target_type" slot="trigger" caret>Dropdown</sl-button>
+          <sl-menu>
+            <sl-menu-item>Dropdown Item 1</sl-menu-item>
+            <sl-menu-item>Dropdown Item 2</sl-menu-item>
+            <sl-menu-item>Dropdown Item 3</sl-menu-item>
+          </sl-menu>
+        </sl-dropdown>
+        <sl-input name="first"> </sl-input>
+        <sl-input name="second"> </sl-input>
 
+        <sl-button type="button" variant="success">전 송</sl-button>
+
+      </div>
 
       <div class="inner_container" id="down_container">
         <div>
@@ -173,12 +188,10 @@
 
     </div>
   </div>
-  
-  <!-- ADD 누르면 나오는 창 -->
 </body>
 
 </html>
 
 
-
+<!-- ADD 누르면 나오는 창 -->
 
