@@ -89,7 +89,7 @@ app.post('/test/createAd', (req, res) => {
 });
 app.get('/test/requestAdminList', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var data;
-    var count;
+    var count = [];
     yield new Promise((resolve) => {
         connection.query(`select id as adId, name as title, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`, function (err, result) {
             if (err) {

@@ -97,7 +97,7 @@ app.post('/test/createAd',(req : Request, res : Response)=>{
 
 app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
     var data :Object;
-    var count : number;
+    var count : any = [];
     await new Promise<void>((resolve) => {
         connection.query(`select id as adId, name as title, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`,
         function(err : Error, result : any){
