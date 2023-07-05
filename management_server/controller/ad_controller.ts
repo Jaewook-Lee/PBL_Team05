@@ -178,20 +178,25 @@ function uploadContents (req: Request, res: Response) {
 async function requestAdminList(req:Request, res:Response){
     var offset : number = Number(req.query.offset);
     var length : number = Number(req.query.length);
-    console.log(req.headers);
     if(offset == undefined && length == undefined){
         res.json({status : "error", message : "필수 파라미터 (offset,length) Error"})
         return;
     }
     var type = req.query.type;
     var search = req.query.search;
-    console.log(offset,length,type,search);
     
+    var sqlQuery : string = `select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id `;
+    var whereQuery : string = `where ${type} like "%${search}%"`
 
+    if (type != undefined){
+        sqlQuery+= whereQuery; 
+    }
+    sqlQuery+= ` limit ${offset},${length};`
+    
     var data :Object;
     var count : any = [];
     await new Promise<void>((resolve) => {
-        connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id limit ${offset},${length};`,
+        connection.query(sqlQuery,
         function(err : Error, result : any){
             if(err){
                 console.log(err);
@@ -203,9 +208,12 @@ async function requestAdminList(req:Request, res:Response){
             resolve();
         })
     });
-
+    var sqlQuery2 : string = `select count(*) as adCount from ads `;
+    if (type != undefined){
+        sqlQuery2+= whereQuery; 
+    }
     await new Promise<void>((resolve) => {
-        connection.query(`select count(*) as adCount from ads`,
+        connection.query(sqlQuery2,
         function(err : Error, result : any){
             if(err){
                 console.log(err);
@@ -219,7 +227,6 @@ async function requestAdminList(req:Request, res:Response){
     });
     
     res.json({adCount : count[0].adCount ,data : data!});
-    console.log(res.getHeaderNames());
 }
 
 export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList,requestAdminList}

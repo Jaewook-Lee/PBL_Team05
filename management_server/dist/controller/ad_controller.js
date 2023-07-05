@@ -192,11 +192,16 @@ function requestAdminList(req, res) {
         }
         var type = req.query.type;
         var search = req.query.search;
-        console.log(offset, length, type, search);
+        var sqlQuery = `select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id `;
+        var whereQuery = `where ${type} like "%${search}%"`;
+        if (type != undefined) {
+            sqlQuery += whereQuery;
+        }
+        sqlQuery += ` limit ${offset},${length};`;
         var data;
         var count = [];
         yield new Promise((resolve) => {
-            connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id limit ${offset},${length};`, function (err, result) {
+            connection.query(sqlQuery, function (err, result) {
                 if (err) {
                     console.log(err);
                     res.json({
@@ -207,8 +212,12 @@ function requestAdminList(req, res) {
                 resolve();
             });
         });
+        var sqlQuery2 = `select count(*) as adCount from ads `;
+        if (type != undefined) {
+            sqlQuery2 += whereQuery;
+        }
         yield new Promise((resolve) => {
-            connection.query(`select count(*) as adCount from ads`, function (err, result) {
+            connection.query(sqlQuery2, function (err, result) {
                 if (err) {
                     console.log(err);
                     res.json({
