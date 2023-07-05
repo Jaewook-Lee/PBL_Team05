@@ -111,7 +111,7 @@ function createAd(req, res) {
         }
         connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
         values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
-        "${req.body.periodEnd}","${req.body.maxViewCount}")`, function (err) {
+        "${req.body.periodEnd}","${req.body.maxViewCount}")`, (err) => {
             if (err) {
                 console.log(err);
                 res.json({
@@ -120,10 +120,12 @@ function createAd(req, res) {
                 });
             }
             else {
-                res.json({
-                    status: "success",
-                    message: "등록에 성공했습니다.",
-                    adId: ""
+                connection.query(`select id as adId from ads where name = "${req.body.name}" order by create_at desc`, (err, result) => {
+                    res.json({
+                        status: "success",
+                        message: "등록에 성공했습니다.",
+                        adId: result[0].adId
+                    });
                 });
             }
         });
