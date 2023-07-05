@@ -2,7 +2,8 @@ import express, {Express, Request, Response} from "express";
 import mysql from 'mysql';
 import cors from 'cors';
 import adRoutes from './routes/ad'
-const port = 8000;
+// const port : Number = 8000;
+const port : Number = 8001; // For local testing
 
 //db connector
 const connection : mysql.Connection = mysql.createConnection({
@@ -43,7 +44,7 @@ app.get('/dbTest',(req : Request, res : Response)=>{
 
 // 사진보내기 테스트 겸 기본화면
 app.get('/',(req : Request, res : Response)=>{
-    const photoPath = 'pic1.jpeg'
+    const photoPath : string = 'pic1.jpeg';
     res.sendFile(photoPath, {root : '.'}); // root 잘 확인해야될듯
 });
 
