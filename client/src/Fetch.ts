@@ -48,7 +48,7 @@ export class Fetch {
         country;
         gender;
         console.log("sans");
-        const response = await fetch(`${this._entry}/AD/requestList`, {
+        const response = await fetch(`${this._entry}/test/requestList`, {
             method: "GET"
         });
 
