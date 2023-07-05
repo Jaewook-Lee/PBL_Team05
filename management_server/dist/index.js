@@ -1,4 +1,13 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -14,7 +23,7 @@ const connection = mysql_1.default.createConnection({
     port: 3306,
     user: 'dbmasteruser',
     password: '00000000',
-    database: 'dbmaster'
+    database: 'ad_management_platform_server'
 });
 connection.connect((error) => {
     if (error) {
@@ -27,7 +36,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.static('.')); //url로 직접 사진에 접속할때 필요한 코드 "localhost:8000/pic1.jpeg"
 app.use(express_1.default.json());
 app.use('/AD', ad_1.default);
-app.use((0, cors_1.default)()); // CORS 문제 해결
+app.use((0, cors_1.default)());
 //db 연결 잘되나 확인하는 url
 app.get('/dbTest', (req, res) => {
     connection.query('SELECT * From Test', (error, result) => {
@@ -78,6 +87,37 @@ app.post('/test/createAd', (req, res) => {
         adId: "0000"
     });
 });
+app.get('/test/requestAdminList', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var data;
+    var count = [];
+    yield new Promise((resolve) => {
+        connection.query(`select id as adId, name as title, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.json({
+                    status: "error"
+                });
+            }
+            data = result;
+            resolve();
+        });
+    });
+    yield new Promise((resolve) => {
+        connection.query(`select count(*) as adCount from ads`, function (err, result) {
+            if (err) {
+                console.log(err);
+                res.json({
+                    status: "error"
+                });
+            }
+            count = result;
+            resolve();
+        });
+    });
+    console.log(data);
+    console.log(count);
+    res.json({ adCount: count[0].adCount, data: data });
+}));
 /* ********************** */
 app.listen(port, () => {
     console.log(`listening on port ${port}`);
