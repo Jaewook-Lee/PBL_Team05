@@ -8,7 +8,7 @@ const connection : mysql.Connection = mysql.createConnection({
     port : 3306,
     user : 'dbmasteruser',
     password : '00000000',
-    database : 'dbmaster'
+    database : 'ad_management_platform_server'
 });
 
 connection.connect ((error)=>{
@@ -106,19 +106,21 @@ function createAd(req: Request, res: Response){
 
         connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
         values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
-        "${req.body.periodEnd}","${req.body.maxViewCount}")`,
-        function(err : Error) {
+        "${req.body.periodEnd}","${req.body.maxViewCount}")`, (err : Error) => {
             if(err) {
                 console.log(err);
                 res.json({
                     status: "fail",
                     message: "등록에 실패했습니다."
                 });
-            } else {
-                res.json({
-                    status: "success",
-                    message: "등록에 성공했습니다.",
-                    adId: ""
+            }
+            else {
+                connection.query(`select id as adId from ads where name = "${req.body.name}" order by create_at desc`,(err : Error, result : any)=>{
+                    res.json({
+                        status: "success",
+                        message: "등록에 성공했습니다.",
+                        adId: result[0].adId
+                    });
                 });
             }
         }
