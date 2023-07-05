@@ -21,7 +21,7 @@ connection.connect((error) => {
 });
 function requestList(req, res) {
     res.json({ stauts: "success",
-        data: [{ content: "pic1.jpeg", width: "requestList" }]
+        data: [{ content: "pic1.jpeg", width: "100", height: "100", slotId: "1234", exposureTime: "2023-11-11 15:00:00" }]
     });
 }
 exports.requestList = requestList;

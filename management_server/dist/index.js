@@ -54,11 +54,6 @@ app.get('/', (req, res) => {
     res.sendFile(photoPath, { root: '.' }); // root 잘 확인해야될듯
 });
 /* 이하 테스트를 위한 더미 코드 */
-app.get('/test/requestList', (req, res) => {
-    res.json({ stauts: "success",
-        data: [{ content: "pic1.jpeg", width: "requestList" }]
-    });
-});
 app.get('/test/readAd', (req, res) => {
     res.send({ stauts: "success",
         data: [{ content: "pic1.jpeg", width: "readAd" }]
@@ -91,7 +86,7 @@ app.get('/test/requestAdminList', (req, res) => __awaiter(void 0, void 0, void 0
     var data;
     var count = [];
     yield new Promise((resolve) => {
-        connection.query(`select id as adId, name as title, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`, function (err, result) {
+        connection.query(`select id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount from ads`, function (err, result) {
             if (err) {
                 console.log(err);
                 res.json({
