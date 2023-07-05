@@ -1,10 +1,15 @@
-import { Fetch } from "./Fetch";
 import css from "./index.css";
 css;
 
-async function main(): Promise<void> {
-    const respose = await Fetch.requestList("", "");
-    console.log(respose);
-}
+const adTestPopup = document.getElementById("when_click_adtest") as HTMLDivElement;
 
-main();
+const adTestButton = document.getElementById("ADTest") as HTMLButtonElement;
+adTestButton.onclick = () => {
+    adTestPopup.style.display = "flex";
+};
+
+const adTestPopupCloseButton = document.getElementById("ok") as HTMLButtonElement;
+adTestPopupCloseButton.onclick = () => {
+    adTestPopup.style.display ="none";
+};
+

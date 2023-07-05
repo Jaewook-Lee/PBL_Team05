@@ -5,6 +5,19 @@ export interface GenericResponse {
     message: string
 }
 
+export interface AdminAdList {
+    adCount: number,
+    data: {
+        isActive: 1 | 0,
+        adId: number,
+        name: string,
+        createdAt: string, // yyyy-mm-dd hh:mm:ss
+        periodBegin: string, // yyyy-mm-dd hh:mm:ss
+        periodEnd: string, // yyyy-mm-dd hh:mm:ss
+        maxViewCount: number
+    }[];
+}
+
 export interface AdList {
     status: Status
     data: {
@@ -13,7 +26,7 @@ export interface AdList {
         height: number,
         slotId: string, // html element id
         exposureTime: string // yyyy-mm-dd hh:mm:ss
-    }
+    }[];
 }
 
 export type DeleteAdResult = GenericResponse;
@@ -47,14 +60,48 @@ export type UploadContentsResult = GenericResponse;
 export class Fetch {
     private static readonly _entry = "http://13.125.111.160:8000";
 
+    public static async requestAdminList(
+        offset: number,
+        length: number
+    ): Promise<AdminAdList>;
+
+    public static async requestAdminList(
+        offset: number,
+        length: number,
+        searchWord: string,
+        searchType: string
+    ): Promise<AdminAdList>;
+
+    public static async requestAdminList(
+        offset: number,
+        length: number,
+        searchWord?: string,
+        searchType?: string
+    ): Promise<AdminAdList> {
+        const query = new URLSearchParams({
+            offset: offset.toString(),
+            length: length.toString()
+        });
+        if (searchWord) {
+            query.append("searchWord", searchWord);
+            query.append("searchType", searchType!);
+        }
+        const response = await fetch(`${this._entry}/AD/requestAdminList?${query}`, {
+            method: "GET"
+        });
+
+        return response.json();
+    }
+
     public static async requestList(
         country: string,
-        gender: string
+        gender: Gender
     ): Promise<AdList> {
-        country;
-        gender;
-        console.log("sans");
-        const response = await fetch(`${this._entry}/test/requestList`, {
+        const query = new URLSearchParams({
+            country: country,
+            gender: gender.toString()
+        });
+        const response = await fetch(`${this._entry}/AD/requestList?${query}`, {
             method: "GET"
         });
 

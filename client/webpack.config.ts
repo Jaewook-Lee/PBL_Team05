@@ -1,5 +1,5 @@
 import CssMinimizerWebpackPlugin from "css-minimizer-webpack-plugin";
-import ESLintPlugin from "eslint-webpack-plugin";
+// import ESLintPlugin from "eslint-webpack-plugin";
 import ExtractCssChunks from "extract-css-chunks-webpack-plugin";
 import HtmlWebpackPlugin from "html-webpack-plugin";
 import path from "path";
@@ -91,11 +91,11 @@ export default (env: any): webpack.Configuration & { devServer?: WebpackDevServe
             filename: "[name].css",
             chunkFilename: "[id].css"
         }) as any,
-        new ESLintPlugin({
-            extensions: ["ts", "tsx"],
-            fix: true,
-            cache: true
-        })
+        // new ESLintPlugin({
+        //     extensions: ["ts", "tsx"],
+        //     fix: true,
+        //     cache: true
+        // })
     ],
     devServer: {
         host: "0.0.0.0",
