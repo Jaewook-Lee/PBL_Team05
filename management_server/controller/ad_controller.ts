@@ -19,7 +19,6 @@ connection.connect ((error)=>{
     console.log('db connect success')
 });
 
-
 function deleteAd (req: Request, res: Response) {
     res.json({
         "status": "success",
@@ -48,25 +47,25 @@ function createAd (req: Request, res: Response) {
         })
     }
     else {
-        // Parsing country code
-        const countryName = params.country;
+        // Parsing country name to numeric country code
+        const countryName : string = params.country;
         const isoAllData = iso.all();
         let countryCode : Number = -1;
-        for (let i = 0; i < isoAllData.length; i++) {
+        for (let i : number = 0; i < isoAllData.length; i++) {
             if (countryName === isoAllData[i].country) {
                 countryCode = Number(isoAllData[i].numeric);
                 break;
             }
         }
 
-        // Parsing gender(Bit-masking)
-    }
+        // SQL Query to DB
 
-    res.json({
-        "status": "success",
-        "message": "등록에 성공했습니다.",
-        "adId": "0000"
-    });
+        res.json({
+            "status": "success",
+            "message": "등록에 성공했습니다.",
+            "adId": ""
+        });
+    }
 }
 
 function activeAd (req: Request, res: Response) {
