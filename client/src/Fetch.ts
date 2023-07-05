@@ -8,24 +8,30 @@ export interface GenericResponse {
 export interface AdList {
     status: Status
     data: {
-        content: string,
+        content: string, // html content
         width: number,
         height: number,
-        slotId: string,
-        exposureTime: string
+        slotId: string, // html element id
+        exposureTime: string // yyyy-mm-dd hh:mm:ss
     }
 }
 
 export type DeleteAdResult = GenericResponse
 
+export enum Gender {
+    male = 1 << 0,
+    felmale = 1 << 1,
+    unknown = 1 << 2
+}
+
 export interface CreateAdParams {
     name: string,
     advertiser: string,
-    createdAt: string,
-    country: string,
-    gender: string,
-    periodBegin: string,
-    periodEnd: string,
+    createdAt: string, // yyyy-mm-dd hh:mm:ss
+    country: string, // iso-3166-1 country
+    gender: Gender,
+    periodBegin: string, // yyyy-mm-dd hh:mm:ss
+    periodEnd: string, // yyyy-mm-dd hh:mm:ss
     maxViewCount: number
 }
 
