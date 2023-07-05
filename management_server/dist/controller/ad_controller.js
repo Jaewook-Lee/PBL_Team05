@@ -153,6 +153,7 @@ function activeAd(req, res) {
 }
 exports.activeAd = activeAd;
 //put
+//todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd(req, res) {
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`, function (err) {
@@ -174,6 +175,7 @@ function updateAd(req, res) {
 exports.updateAd = updateAd;
 // file을 받는 tool 필요할듯.
 //post
+//todo
 function uploadContents(req, res) {
     res.json({
         status: "success",
@@ -181,7 +183,7 @@ function uploadContents(req, res) {
     });
 }
 exports.uploadContents = uploadContents;
-//todo
+//todo Error control
 function requestAdminList(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var offset = Number(req.query.offset);

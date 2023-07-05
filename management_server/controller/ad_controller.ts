@@ -147,6 +147,7 @@ function activeAd (req: Request, res: Response) {
 }
 
 //put
+//todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd (req: Request, res: Response) {
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`,
@@ -167,6 +168,7 @@ function updateAd (req: Request, res: Response) {
 
 // file을 받는 tool 필요할듯.
 //post
+//todo
 function uploadContents (req: Request, res: Response) {
     res.json({
         status: "success",
@@ -174,7 +176,7 @@ function uploadContents (req: Request, res: Response) {
     });
 }
 
-//todo
+//todo Error control
 async function requestAdminList(req:Request, res:Response){
     var offset : number = Number(req.query.offset);
     var length : number = Number(req.query.length);
