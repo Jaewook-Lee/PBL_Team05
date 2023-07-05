@@ -39,21 +39,43 @@ function requestList (req: Request, res: Response) {
 // db및 api 수정필요.
 //get
 function readAd (req: Request, res: Response) {
-    console.log(req.body);
-    connection.query(`select name as adName, period_begin, period_end, advertizer, country from ads where id = '${req.body.adId}' `,
-    function(err : Error, result : any){
-        if(err){
-            console.log(err)
-            // Todo : 빈 객체일 경우 실패 메시지 전달하도록 코드 작성해야될듯
-            res.json({
-                status : "fail",
-                message : "조회에 실패했습니다."
-            });
-        }else{
-            console.log(result);
-            res.json(result);
-        }
-    });
+    if (req.query.adId === undefined) {
+        res.json({
+            status : "fail",
+            message : "조회에 실패했습니다."
+        });
+    } else {
+        connection.query(`select ads.name, ads.period_begin, ads.period_end, ads.advertizer, ads.country, ad_contents_data.type, ad_statics.hit_count, ad_statics.hit_time_sum from ads inner join ad_contents_data on ads.id = ad_contents_data.id inner join ad_statics on ads.id = ad_statics.id where ads.id = ${req.query.adId}`, 
+        function(err : Error, result : any) {
+            // DB 조회 과정에서 에러가 나거나, row 수가 0일 경우(JOIN 결과 row가 0개일 수 있다.) 실패 메시지 전달
+            if (err || result.length === 0) {
+                console.log(err);
+                console.log(`Result rows: ${result}`);
+                res.json({
+                    status : "fail",
+                    message : "조회에 실패했습니다."
+                });
+            } else {
+                const startDay : Date = result[0].period_begin;
+                const startYear : number = startDay.getFullYear(); const startMonth : number = startDay.getMonth(); const startDate : number = startDay.getDate();
+
+                const endDay : Date = result[0].period_end;
+                const endYear : number = endDay.getFullYear(); const endMonth : number = endDay.getMonth(); const endDate : number = endDay.getDate();
+
+                const period : string = `${startYear}-${startMonth}-${startDate} ~ ${endYear}-${endMonth}-${endDate}`;
+                
+                res.json({
+                    "adName": result[0].name,
+                    "period": period,
+                    "advertiser": result[0].advertizer,
+                    "language": result[0].country,
+                    "adType": result[0].type,
+                    "hitCount": result[0].hit_count,
+                    "watchTimeSum": result[0].hit_count_sum
+                });
+            }
+        });
+    }
 }
 
 //delete
@@ -78,8 +100,6 @@ function deleteAd (req: Request, res: Response) {
     );
 
 }
-
-
 
 //post
 function createAd(req: Request, res: Response){
