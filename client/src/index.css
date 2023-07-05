@@ -145,3 +145,88 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* ADD 누르면 나오는 창 */
+
+#when_click_ADD{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+
+    display: none;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+#ADD_big_container {
+    background-color: blue;
+    width: 350px;
+    height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add_first_container{
+    margin-top: 50px;
+
+    width : 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#add_second_container{
+    margin-top : 20px;
+    margin-bottom: 20px;
+}
+
+#add_third_container{
+    margin-top : 20px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#add_fourth_container{
+    margin-top : 20px;
+    }
+#first_dropdown{
+    width : 250px;
+}
+
+#second_dropdown{
+    width : 250px;
+}  
+
+#ADD_okcancel_button{
+    width: calc(100% - 20px);
+    margin-bottom: 40px;
+
+
+    display : flex;
+    flex-direction: row;
+    align-items : center;
+}
+
+#ADD_okcancel_button > * {
+    flex-grow: 1;
+    margin-right : 10px;
+    margin-left : 10px;
+}
+
+
+/* 삭제 눌렀을때 */
