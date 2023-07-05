@@ -10,7 +10,7 @@ adTestButton.onclick = () => {
 const adTestPopupCloseButton = document.getElementById("ADDTEST_ok_button") as HTMLButtonElement;
 
 adTestPopupCloseButton.onclick = () => {
-    adTestPopup.style.display ="none";
+    adTestPopup.style.display = "none";
 };
 // ADD 눌렀을때
 const addButton = document.getElementById("ADD") as HTMLButtonElement;

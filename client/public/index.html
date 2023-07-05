@@ -10,11 +10,11 @@
   <script type="module"
     src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/shoelace-autoloader.js"></script>
 
-  
+
 </head>
 
 <body>
-  <!-- 첫번째 화면 -->  
+  <!-- 첫번째 화면 -->
   <div id="first_screen">
     <div id="AD_Management_Platform_AD_List">
       <b>AD Management Platform - AD List</b>
@@ -36,7 +36,7 @@
       <sl-input placeholder="검색어"></sl-input>
       <sl-button type="button" variant="primary">검색</sl-button>
     </div>
-    <table border="1" id = "big_table">
+    <table border="1" id="big_table">
       <thead>
         <div id="table_head">
           <tr>
@@ -53,16 +53,16 @@
       <tbody>
         <div id="first_table">
           <tr>
-              <td>1</td>
-              <td>현대자동차</td>
+            <td>1</td>
+            <td>현대자동차</td>
             <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
             <td>1000</td>
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
               <sl-button size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td> 
+              <sl-button class="delete" size="small">삭제</sl-button>
+            </td>
             <td>O</td>
           </tr>
         </div>
@@ -108,8 +108,8 @@
               <sl-button size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
-            <td>O</td>  
-          </tr>   
+            <td>O</td>
+          </tr>
         </div>
         <div id="fifth_table">
           <tr>
@@ -129,14 +129,15 @@
       </tbody>
     </table>
 
-    <div id = "page_navigation">
-      <a href=""><<</a>
-      <a href="">1</a>
-      <a href="">2</a>
-      <a href="">3</a>
-      <a href="">4</a>
-      <a href="">5</a>
-      <a href="">>></a>
+    <div id="page_navigation">
+      <a href="">
+        <<< /a>
+          <a href="">1</a>
+          <a href="">2</a>
+          <a href="">3</a>
+          <a href="">4</a>
+          <a href="">5</a>
+          <a href="">>></a>
     </div>
 
 
@@ -144,7 +145,7 @@
 
   <!-- ad test눌렀을때 뜨는 창-->
 
-  <div id = "when_click_adtest">
+  <div id="when_click_adtest">
     <div id="container">
       <div class="inner_container" id="up_container">
         <div>
@@ -170,9 +171,9 @@
           Result
         </div>
         <sl-textarea></sl-textarea>
-        <div id = "two_row_button">
-          <sl-button id = "web_view" type="button" variant="warning">Web view</sl-button>    
-          <sl-button id = "ADDTEST_ok_button" type="button" variant="success">확 인</sl-button>
+        <div id="two_row_button">
+          <sl-button id="web_view" type="button" variant="warning">Web view</sl-button>
+          <sl-button id="ADDTEST_ok_button" type="button" variant="success">확 인</sl-button>
         </div>
 
       </div>
@@ -181,9 +182,9 @@
 
   <!-- ADD 누르면 나오는 창 -->
 
-  <div id = "when_click_ADD">
+  <div id="when_click_ADD">
     <div id="ADD_big_container">
-      <div id = "add_first_container">
+      <div id="add_first_container">
         <sl-dropdown>
           <sl-button id="first_dropdown" slot="trigger" caret>Dropdown</sl-button>
           <sl-menu>
@@ -192,28 +193,32 @@
             <sl-menu-item>Dropdown Item 3</sl-menu-item>
           </sl-menu>
         </sl-dropdown>
-        <div id = "add_second_container"><sl-input></sl-input></div>
+        <div id="add_second_container"><sl-input></sl-input></div>
         <div>
           <sl-dropdown>
-          <sl-button id="second_dropdown" slot="trigger" caret>Dropdown</sl-button>
-          <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
+            <sl-button id="second_dropdown" slot="trigger" caret>Dropdown</sl-button>
+            <sl-menu>
+              <sl-menu-item>Dropdown Item 1</sl-menu-item>
+              <sl-menu-item>Dropdown Item 2</sl-menu-item>
+              <sl-menu-item>Dropdown Item 3</sl-menu-item>
+            </sl-menu>
+          </sl-dropdown>
         </div>
-        <div id ="add_fourth_container">
-        <sl-textarea></sl-textarea> 
+        <div id="add_fourth_container">
+          <sl-textarea></sl-textarea>
         </div>
       </div>
-      <div id= "ADD_okcancel_button">
-        <sl-button id = "ADD_cancel_button"variant="success" size="small">취소</sl-button>
-        <sl-button id = "ADD_ok_button" variant="success" size="small">확인</sl-button>
+      <div id="ADD_okcancel_button">
+        <sl-button id="ADD_cancel_button" variant="success" size="small">취소</sl-button>
+        <sl-button id="ADD_ok_button" variant="success" size="small">확인</sl-button>
       </div>
+    </div>
+
+
+    <!-- 수정 누르면 나오는 창  -->
+    <div id="list_in_edit">
+
     </div>
 </body>
 
 </html>
-
-
