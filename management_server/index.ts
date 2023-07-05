@@ -29,6 +29,13 @@ app.use(express.json());
 app.use('/AD', adRoutes);
 app.use(cors());
 
+app.all('/*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    next();
+  });
+  
+
 //db 연결 잘되나 확인하는 url
 app.get('/dbTest',(req : Request, res : Response)=>{
     connection.query('SELECT * From Test', (error, result)=>{
@@ -119,6 +126,7 @@ app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
                 res.json({
                     status : "error"
                 })  
+                return
             }
             count= result;
             resolve();
