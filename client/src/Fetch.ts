@@ -8,6 +8,7 @@ export interface GenericResponse {
 export interface AdminAdList {
     adCount: number,
     data: {
+        isActive: 1 | 0,
         adId: number,
         name: string,
         createdAt: string, // yyyy-mm-dd hh:mm:ss
