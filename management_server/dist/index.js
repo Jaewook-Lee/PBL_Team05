@@ -114,8 +114,6 @@ app.get('/test/requestAdminList', (req, res) => __awaiter(void 0, void 0, void 0
             resolve();
         });
     });
-    console.log(data);
-    console.log(count);
     res.json({ adCount: count[0].adCount, data: data });
 }));
 /* ********************** */

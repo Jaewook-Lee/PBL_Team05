@@ -6,17 +6,21 @@
     justify-content: space-between;
     align-items: center;
 }
-#AD_Management_Platform_AD_List{
+
+#AD_Management_Platform_AD_List {
     margin-top: 20px;
 }
-#ADD, #ADTest {
+
+#ADD,
+#ADTest {
     margin-top: 50px;
     margin-left: 10px;
     margin-right: 10px;
 
     height: 100px;
-    width: 500px; 
-  }
+    width: 500px;
+}
+
 #SearchingType {
     display: flex;
     flex-direction: row;
@@ -27,41 +31,42 @@
     margin-right: 10px;
 
     height: 100px;
-    width: 1030px;  
+    width: 1030px;
 }
 
-#SearchingType > * {
+#SearchingType>* {
     margin: 0 20px;
 }
 
-#SearchingType > :nth-child(1) {
-    flex-grow:2;
+#SearchingType> :nth-child(1) {
+    flex-grow: 2;
     margin-left: 0;
-} 
+}
 
-#SearchingType > :nth-child(1) > :nth-child(1) {
+#SearchingType> :nth-child(1)> :nth-child(1) {
     width: 100%;
-} 
+}
 
 
 
 
-#SearchingType > :nth-child(2) {
-    flex-grow:2;
-} 
+#SearchingType> :nth-child(2) {
+    flex-grow: 2;
+}
 
-#SearchingType > :nth-child(3) {
+#SearchingType> :nth-child(3) {
     flex-grow: 3;
     margin-right: 0;
-} 
+}
 
-#big_table{
+#big_table {
     text-align: center;
 }
 
-#page_navigation{
-    margin-top:30px;
+#page_navigation {
+    margin-top: 30px;
 }
+
 /* ad test 눌렀을때 뜨는 창 */
 #container {
     background-color: blue;
@@ -76,8 +81,8 @@
 
 .inner_container {
     border: solid 2px white;
-    
-    width : calc(100% - 40px);
+
+    width: calc(100% - 40px);
     height: calc(50% - 30px);
 
     box-sizing: border-box;
@@ -85,7 +90,7 @@
     border-radius: 10px;
 }
 
-#up_container{
+#up_container {
     margin-bottom: 15px;
 
     display: flex;
@@ -93,16 +98,17 @@
     justify-content: space-around;
     align-items: center;
 
-    
+
 }
-#down_container{
+
+#down_container {
     margin-bottom: 15px;
 
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    
+
 }
 
 #two_row_button {
@@ -114,18 +120,18 @@
     width: 100%;
 }
 
-#up_container > * {
-    
-    width : calc(100% - 80px);
-    
-}
+#up_container>* {
 
-#down_container>*{
-    width : calc(100% - 80px);
+    width: calc(100% - 80px);
 
 }
 
-#when_click_adtest{
+#down_container>* {
+    width: calc(100% - 80px);
+
+}
+
+#when_click_adtest {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -145,3 +151,90 @@ body {
     margin: 0;
     padding: 0;
 }
+
+/* ADD 누르면 나오는 창 */
+
+#when_click_ADD {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    height: 100vh;
+    width: 100vw;
+
+    display: none;
+
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#ADD_big_container {
+    background-color: blue;
+    width: 350px;
+    height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#add_first_container {
+    margin-top: 50px;
+
+    width: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#add_second_container {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#add_third_container {
+    margin-top: 20px;
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#add_fourth_container {
+    margin-top: 20px;
+}
+
+#first_dropdown {
+    width: 250px;
+}
+
+#second_dropdown {
+    width: 250px;
+}
+
+#ADD_okcancel_button {
+    width: calc(100% - 20px);
+    margin-bottom: 40px;
+
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#ADD_okcancel_button>* {
+    flex-grow: 1;
+    margin-right: 10px;
+    margin-left: 10px;
+}
+
+
+/* 삭제 눌렀을때 */
