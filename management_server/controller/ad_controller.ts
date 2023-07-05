@@ -18,26 +18,6 @@ connection.connect ((error)=>{
     }
     console.log('db connect success')
 });
-import mysql from 'mysql';
-
-const connection : mysql.Connection = mysql.createConnection({
-    host : 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
-    port : 3306,
-    user : 'dbmasteruser',
-    password : '00000000',
-    database : 'ad_management_platform_server'
-});
-
-connection.connect ((error)=>{
-    if (error){
-        console.error('fail to connect',error);
-        return;
-    }
-    console.log('db connect success')
-});
-
-
-
 
 function deleteAd (req: Request, res: Response) {
     console.log(req.body);
@@ -129,7 +109,6 @@ function createAd(req: Request, res: Response){
     }
 }
 
-
 //deactivate도 필요할듯.
 function activeAd (req: Request, res: Response) {
     connection.query(`insert into active_ads (id) values (${req.body.adId});`,function (err){
@@ -191,4 +170,4 @@ function requestList (req: Request, res: Response) {
 
 }
 
-export { deleteAd, readAd, createAd, activeAd, uploadContents, requestList }
+export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList }

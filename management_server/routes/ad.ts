@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { requestList, deleteAd, readAd, createAd, activeAd, uploadContents } from "../controller/ad_controller";
+import { requestList, deleteAd, readAd, createAd, activeAd, updateAd, uploadContents } from "../controller/ad_controller";
 
 
 const router : Router = Router();
@@ -17,8 +17,6 @@ router.post('/activeAd', activeAd);
 router.put('/updateAd', updateAd);
 
 router.post('/uploadContents', uploadContents);    //광고의 contents를 upload
-
-router.post('/createAd', createAd);
 
 
 export default router;

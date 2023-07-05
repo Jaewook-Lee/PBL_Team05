@@ -2,8 +2,7 @@ import express, {Express, Request, Response} from "express";
 import mysql from 'mysql';
 import cors from 'cors';
 import adRoutes from './routes/ad'
-// const port : Number = 8000;
-const port : Number = 8001; // For local testing
+const port : Number = 8000;
 
 //db connector
 const connection : mysql.Connection = mysql.createConnection({
