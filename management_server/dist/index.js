@@ -36,7 +36,7 @@ const app = (0, express_1.default)();
 app.use(express_1.default.static('.')); //url로 직접 사진에 접속할때 필요한 코드 "localhost:8000/pic1.jpeg"
 app.use(express_1.default.json());
 app.use('/AD', ad_1.default);
-app.use((0, cors_1.default)()); // CORS 문제 해결
+app.use((0, cors_1.default)());
 //db 연결 잘되나 확인하는 url
 app.get('/dbTest', (req, res) => {
     connection.query('SELECT * From Test', (error, result) => {
