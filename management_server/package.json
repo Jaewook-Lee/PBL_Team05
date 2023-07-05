@@ -20,6 +20,7 @@
     "@types/mysql": "^2.15.21",
     "@types/node": "^20.3.3",
     "concurrently": "^8.2.0",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "iso-3166-1": "^2.1.1",
     "mysql": "^2.18.1",
