@@ -1,6 +1,7 @@
 import express, {Express, Request, Response} from "express";
 import mysql from 'mysql';
 import adRoutes from './routes/ad'
+import testRouter from './routes/test'
 const port : Number = 8000;
 
 //db connector
@@ -26,6 +27,7 @@ const app: Express = express();
 app.use(express.static('.')) //url로 직접 사진에 접속할때 필요한 코드 "localhost:8000/pic1.jpeg"
 app.use(express.json());
 app.use('/AD', adRoutes);
+app.use('/test',testRouter);
 
 
 //db 연결 잘되나 확인하는 url
