@@ -178,7 +178,7 @@ function uploadContents (req: Request, res: Response) {
 async function requestAdminList(req:Request, res:Response){
     var offset : number = Number(req.query.offset);
     var length : number = Number(req.query.length);
-
+    console.log(req.headers);
     if(offset == undefined && length == undefined){
         res.json({status : "error", message : "필수 파라미터 (offset,length) Error"})
         return;
@@ -217,7 +217,9 @@ async function requestAdminList(req:Request, res:Response){
             resolve();
         })
     });
+    
     res.json({adCount : count[0].adCount ,data : data!});
+    console.log(res.getHeaderNames());
 }
 
 export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList,requestAdminList}
