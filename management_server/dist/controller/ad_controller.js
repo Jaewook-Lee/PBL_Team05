@@ -12,7 +12,7 @@ const connection = mysql_1.default.createConnection({
     port: 3306,
     user: 'dbmasteruser',
     password: '00000000',
-    database: 'dbmaster'
+    database: 'ad_management_platform_server'
 });
 connection.connect((error) => {
     if (error) {
@@ -41,8 +41,7 @@ exports.requestList = requestList;
 // db및 api 수정필요.
 //get
 function readAd(req, res) {
-    console.log(req.body);
-    connection.query(`select name as adName, period_begin, period_end, advertizer, country from ads where id = '${req.body.adId}' `, function (err, result) {
+    connection.query(`select ads.name, ads.period_begin, ads.period_end, ads.advertizer, ads.country, ad_contents_data.type, ad_statics.hit_count, ad_statics.hit_time_sum from ads inner join ad_contents_data on ads.id = ad_contents_data.id inner join ad_statics on ads.id = ad_statics.id where ads.id = ${req.query.adId}`, function (err, result) {
         if (err) {
             console.log(err);
             // Todo : 빈 객체일 경우 실패 메시지 전달하도록 코드 작성해야될듯
@@ -52,8 +51,24 @@ function readAd(req, res) {
             });
         }
         else {
-            console.log(result);
-            res.json(result);
+            const startDay = result[0].period_begin;
+            const startYear = startDay.getFullYear();
+            const startMonth = startDay.getMonth();
+            const startDate = startDay.getDate();
+            const endDay = result[0].period_end;
+            const endYear = endDay.getFullYear();
+            const endMonth = endDay.getMonth();
+            const endDate = endDay.getDate();
+            const period = `${startYear}-${startMonth}-${startDate} ~ ${endYear}-${endMonth}-${endDate}`;
+            res.json({
+                "adName": result[0].name,
+                "period": period,
+                "advertiser": result[0].advertizer,
+                "language": result[0].country,
+                "adType": result[0].type,
+                "hitCount": result[0].hit_count,
+                "watchTimeSum": result[0].hit_count_sum
+            });
         }
     });
 }
@@ -102,7 +117,7 @@ function createAd(req, res) {
         }
         connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
         values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
-        "${req.body.periodEnd}","${req.body.maxViewCount}")`, function (err) {
+        "${req.body.periodEnd}","${req.body.maxViewCount}")`, (err) => {
             if (err) {
                 console.log(err);
                 res.json({
@@ -111,10 +126,12 @@ function createAd(req, res) {
                 });
             }
             else {
-                res.json({
-                    status: "success",
-                    message: "등록에 성공했습니다.",
-                    adId: ""
+                connection.query(`select id as adId from ads where name = "${req.body.name}" order by create_at desc`, (err, result) => {
+                    res.json({
+                        status: "success",
+                        message: "등록에 성공했습니다.",
+                        adId: result[0].adId
+                    });
                 });
             }
         });
