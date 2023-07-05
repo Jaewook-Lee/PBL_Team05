@@ -1,5 +1,10 @@
+import { AdListView } from "./AdListView";
 import css from "./index.css";
 css;
+
+const adListView = new AdListView();
+adListView.initialize();
+
 // ADDTest 눌렀을때
 const adTestButton = document.getElementById("ADTest") as HTMLButtonElement;
 const adTestPopup = document.getElementById("when_click_adtest") as HTMLDivElement;
