@@ -8,7 +8,7 @@ const connection : mysql.Connection = mysql.createConnection({
     port : 3306,
     user : 'dbmasteruser',
     password : '00000000',
-    database : 'dbmaster'
+    database : 'ad_management_platform_server'
 });
 
 connection.connect ((error)=>{
@@ -22,7 +22,7 @@ connection.connect ((error)=>{
 // ad 정렬해서 filtering하는 기능이 필요 할 듯.
 //get
 function requestList (req: Request, res: Response) {
-    connection.query(`select * from ads where gender = '${req.body.gender}' and country  = "${req.body.country}";`,function(err : Error, result : any){
+    connection.query(`select * from ads where gender = '${req.query.gender}' and country  = "${req.body.country}";`,function(err : Error, result : any){
         if (err){
             console.log(err);
             res.json({
@@ -84,7 +84,6 @@ function deleteAd (req: Request, res: Response) {
 //post
 function createAd(req: Request, res: Response){
     const params = req.body;
-
     // Validation
     if (params.name === undefined || params.advertizer === undefined || params.createdAt === undefined || params.country === undefined || params.gender === undefined || params.periodBegin === undefined || params.periodEnd === undefined || params.maxViewCount === undefined) {
         res.json({
@@ -148,7 +147,6 @@ function activeAd (req: Request, res: Response) {
 //put
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd (req: Request, res: Response) {
-    console.log(req.body);
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`,
     function(err : Error){
         if(err){
@@ -175,8 +173,49 @@ function uploadContents (req: Request, res: Response) {
 }
 
 //todo
-function requestAdminList(req:Request, res:Response){
+async function requestAdminList(req:Request, res:Response){
+    var offset : number = Number(req.query.offset);
+    var length : number = Number(req.query.length);
 
+    if(offset == undefined && length == undefined){
+        res.json({status : "error", message : "필수 파라미터 (offset,length) Error"})
+        return;
+    }
+    var type = req.query.type;
+    var search = req.query.search;
+    console.log(offset,length,type,search);
+    
+
+    var data :Object;
+    var count : any = [];
+    await new Promise<void>((resolve) => {
+        connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id limit ${offset},${length};`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+            }
+            data= result;
+            resolve();
+        })
+    });
+
+    await new Promise<void>((resolve) => {
+        connection.query(`select count(*) as adCount from ads`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+            }
+            count= result;
+            resolve();
+        })
+    });
+    res.json({adCount : count[0].adCount ,data : data!});
 }
 
 export { deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestList,requestAdminList}

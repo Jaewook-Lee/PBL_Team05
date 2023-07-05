@@ -124,9 +124,6 @@ app.get('/test/requestAdminList', async (req : Request, res : Response)=>{
             resolve();
         })
     });
-
-    console.log(data!);
-    console.log(count!);
     res.json({adCount : count[0].adCount ,data : data!});
     
 });
