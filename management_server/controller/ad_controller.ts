@@ -1,12 +1,14 @@
 import { Request, Response } from 'express';
 import mysql from 'mysql';
+import iso from 'iso-3166-1';
 
+//db connector
 const connection : mysql.Connection = mysql.createConnection({
     host : 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
     port : 3306,
     user : 'dbmasteruser',
     password : '00000000',
-    database : 'ad_management_platform_server'
+    database : 'dbmaster'
 });
 
 connection.connect ((error)=>{
@@ -16,9 +18,6 @@ connection.connect ((error)=>{
     }
     console.log('db connect success')
 });
-
-
-
 
 function deleteAd (req: Request, res: Response) {
     console.log(req.body);
@@ -63,29 +62,48 @@ function readAd (req: Request, res: Response) {
 
 
 function createAd(req: Request, res: Response){
-    console.log(req.body);
+    const params = req.body;
 
-    connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
-    values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${req.body.country}","${req.body.gender}","${req.body.periodBegin}",
-    "${req.body.periodEnd}","${req.body.maxViewCount}")`,
-    function(err : Error){
-        if(err){
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "등록에 실패했습니다."
-            });
-        }else{
-            res.json({
-            status: "success",
-            message: "등록에 성공했습니다.",
-            adId: "0000"
-        });
-        }
+    // Validation
+    if (params.name === undefined || params.advertizer === undefined || params.createdAt === undefined || params.country === undefined || params.gender === undefined || params.periodBegin === undefined || params.periodEnd === undefined || params.maxViewCount === undefined) {
+        res.json({
+            "status": "fail",
+            "message": "잘못된 데이터가 입력되었습니다."
+        })
     }
-    );
-}
+    else {
+        // Parsing country name to numeric country code
+        const countryName : string = params.country;
+        const isoAllData = iso.all();
+        let countryCode : Number = -1;
+        for (let i : number = 0; i < isoAllData.length; i++) {
+            if (countryName === isoAllData[i].country) {
+                countryCode = Number(isoAllData[i].numeric);
+                break;
+            }
+        }
 
+        connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
+        values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
+        "${req.body.periodEnd}","${req.body.maxViewCount}")`,
+        function(err : Error) {
+            if(err) {
+                console.log(err);
+                res.json({
+                    status: "fail",
+                    message: "등록에 실패했습니다."
+                });
+            } else {
+                res.json({
+                    status: "success",
+                    message: "등록에 성공했습니다.",
+                    adId: ""
+                });
+            }
+        }
+        );
+    }
+}
 
 //deactivate도 필요할듯.
 function activeAd (req: Request, res: Response) {

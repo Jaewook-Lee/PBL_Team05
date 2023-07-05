@@ -10,4 +10,5 @@ router.post('/createAd', ad_controller_1.createAd);
 router.post('/activeAd', ad_controller_1.activeAd);
 router.put('/updateAd', ad_controller_1.updateAd);
 router.post('/uploadContents', ad_controller_1.uploadContents); //광고의 contents를 upload
+router.post('/createAd', ad_controller_1.createAd);
 exports.default = router;
