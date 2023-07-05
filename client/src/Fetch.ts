@@ -54,6 +54,8 @@ export interface CreateAdResult extends GenericResponse {
 
 export type ActiveAdResult = GenericResponse;
 
+export type DeactiveAdResult = GenericResponse;
+
 export type UploadContentsResult = GenericResponse;
 
 
@@ -119,19 +121,10 @@ export class Fetch {
         return response.json();
     }
 
-    public static async createAd(params: CreateAdParams): Promise<CreateAdResult>;
-
-    public static async createAd(params: Partial<CreateAdParams>, adId: number): Promise<CreateAdResult>;
-
-    public static async createAd(params: Partial<CreateAdParams>, adId?: number): Promise<CreateAdResult> {
+    public static async createAd(params: CreateAdParams): Promise<CreateAdResult> {
         const response = await fetch(`${this._entry}/AD/createAd`, {
-            method: adId ? "PUT" : "POST",
-            body: JSON.stringify(
-                adId ? {
-                    adId: adId,
-                    ...params
-                } : params
-            )
+            method: "POST",
+            body: JSON.stringify(params)
         });
 
         return response.json();
@@ -139,6 +132,17 @@ export class Fetch {
 
     public static async activeAd(adId: number): Promise<ActiveAdResult> {
         const response = await fetch(`${this._entry}/AD/activeAd`, {
+            method: "POST",
+            body: JSON.stringify({
+                adId: adId
+            })
+        });
+
+        return response.json();
+    }
+
+    public static async deactiveAd(adId: number): Promise<DeactiveAdResult> {
+        const response = await fetch(`${this._entry}/AD/deactiveAd`, {
             method: "POST",
             body: JSON.stringify({
                 adId: adId
@@ -158,6 +162,24 @@ export class Fetch {
                 adId: adId,
                 contents: contents
             })
+        });
+
+        return response.json();
+    }
+
+    public static async readAd(): Promise<void> {
+
+    }
+
+    public static async updateAd(params: Partial<CreateAdParams>, adId: number): Promise<CreateAdResult> {
+        const response = await fetch(`${this._entry}/AD/updateAd`, {
+            method: "PUT",
+            body: JSON.stringify(
+                adId ? {
+                    adId: adId,
+                    ...params
+                } : params
+            )
         });
 
         return response.json();

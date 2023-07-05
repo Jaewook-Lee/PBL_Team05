@@ -153,6 +153,7 @@ function activeAd(req, res) {
 }
 exports.activeAd = activeAd;
 //put
+//todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd(req, res) {
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`, function (err) {
@@ -174,6 +175,7 @@ function updateAd(req, res) {
 exports.updateAd = updateAd;
 // file을 받는 tool 필요할듯.
 //post
+//todo
 function uploadContents(req, res) {
     res.json({
         status: "success",
@@ -181,7 +183,7 @@ function uploadContents(req, res) {
     });
 }
 exports.uploadContents = uploadContents;
-//todo
+//todo Error control
 function requestAdminList(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var offset = Number(req.query.offset);
@@ -192,11 +194,16 @@ function requestAdminList(req, res) {
         }
         var type = req.query.type;
         var search = req.query.search;
-        console.log(offset, length, type, search);
+        var sqlQuery = `select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id `;
+        var whereQuery = `where ${type} like "%${search}%"`;
+        if (type != undefined) {
+            sqlQuery += whereQuery;
+        }
+        sqlQuery += ` limit ${offset},${length};`;
         var data;
         var count = [];
         yield new Promise((resolve) => {
-            connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id limit ${offset},${length};`, function (err, result) {
+            connection.query(sqlQuery, function (err, result) {
                 if (err) {
                     console.log(err);
                     res.json({
@@ -207,8 +214,12 @@ function requestAdminList(req, res) {
                 resolve();
             });
         });
+        var sqlQuery2 = `select count(*) as adCount from ads `;
+        if (type != undefined) {
+            sqlQuery2 += whereQuery;
+        }
         yield new Promise((resolve) => {
-            connection.query(`select count(*) as adCount from ads`, function (err, result) {
+            connection.query(sqlQuery2, function (err, result) {
                 if (err) {
                     console.log(err);
                     res.json({

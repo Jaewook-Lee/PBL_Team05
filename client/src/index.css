@@ -212,11 +212,11 @@ body {
     margin-top: 20px;
 }
 
-#first_dropdown {
+#add_first_dropdown {
     width: 250px;
 }
 
-#second_dropdown {
+#add_second_dropdown {
     width: 250px;
 }
 
@@ -237,4 +237,22 @@ body {
 }
 
 
-/* 삭제 눌렀을때 */
+/* 수정 눌렀을때 */
+
+#when_click_edit{
+    background-color: blue;
+    width: 350px;
+    height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+
+    display : none;
+}
+
+#list_in_dropdown{
+    width : 250px;
+}
