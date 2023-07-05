@@ -6,6 +6,8 @@ export class AdListView {
 
     private _pageNavigation: HTMLDivElement;
 
+    private _editPanel: HTMLDivElement;
+
     private _pageItemCount: number;
 
     // private _currentPageIndex: number;
@@ -16,6 +18,8 @@ export class AdListView {
         this._prototypeRow = table.children[1].children[0] as HTMLDivElement;
         
         this._pageNavigation = document.getElementById("page_navigation") as HTMLDivElement;
+
+        this._editPanel = document.getElementById("when_click_edit") as HTMLDivElement;
 
         for (const tBody of table.tBodies) {
             table.removeChild(tBody);
@@ -102,8 +106,10 @@ export class AdListView {
 
     public async openEditPanel(adId: number): Promise<void> {
         adId;
+        this._editPanel.style.display = "flex";
     }
 
     public closeEditPanel(): void {
+        this._editPanel.style.display = "none";
     }
 }
