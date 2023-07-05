@@ -60,7 +60,7 @@
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
-              <sl-button class = "edit" size="small">수정</sl-button>
+              <sl-button class="edit" size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
             <td>O</td>
@@ -75,7 +75,7 @@
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
-              <sl-button class = "edit" size="small">수정</sl-button>
+              <sl-button class="edit" size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
             <td>O</td>
@@ -90,7 +90,7 @@
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
-              <sl-button class = "edit" size="small">수정</sl-button>
+              <sl-button class="edit" size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
             <td>O</td>
@@ -105,7 +105,7 @@
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
-              <sl-button class = "edit" size="small">수정</sl-button>
+              <sl-button class="edit" size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
             <td>O</td>
@@ -120,7 +120,7 @@
             <td>2023/05/05 12:00:00</td>
             <td>
               <sl-button size="small">상세</sl-button>
-              <sl-button class = "edit" size="small">수정</sl-button>
+              <sl-button class="edit" size="small">수정</sl-button>
               <sl-button size="small">삭제</sl-button>
             </td>
             <td>X</td>
@@ -130,7 +130,8 @@
     </table>
 
     <div id="page_navigation">
-          <a href=""><<</a>
+      <a href="">
+        <<< /a>
           <a href="">1</a>
           <a href="">2</a>
           <a href="">3</a>
@@ -216,37 +217,39 @@
 
   <!-- 수정 누르면 나오는 창  -->
   <div id="when_click_edit">
-    <div id="list_edit_dropdown1">
-      <div>Type</div>
-      <sl-dropdown>
-        <sl-button id="list_in_dropdown" slot="trigger" caret>Dropdown</sl-button>
-        <sl-menu>
-          <sl-menu-item>Dropdown Item 1</sl-menu-item>
-          <sl-menu-item>Dropdown Item 2</sl-menu-item>
-          <sl-menu-item>Dropdown Item 3</sl-menu-item>
-        </sl-menu>
-      </sl-dropdown>
-    </div>
-    <div id="list_edit_input1">
-      Title
-      <sl-input></sl-input>
-    </div>
-    <div>
-      Text short
-      <sl-input></sl-input>
-    </div>
+    <div id="clicked_edit">
+      <div id="list_edit_dropdown1">
+        <div>Type</div>
+        <sl-dropdown>
+          <sl-button id="list_in_dropdown" slot="trigger" caret>Dropdown</sl-button>
+          <sl-menu>
+            <sl-menu-item>Dropdown Item 1</sl-menu-item>
+            <sl-menu-item>Dropdown Item 2</sl-menu-item>
+            <sl-menu-item>Dropdown Item 3</sl-menu-item>
+          </sl-menu>
+        </sl-dropdown>
+      </div>
+      <div id="list_edit_input1">
+        Title
+        <sl-input></sl-input>
+      </div>
+      <div>
+        Text short
+        <sl-input></sl-input>
+      </div>
 
-    <div>
-      Text long
-      <sl-textarea></sl-textarea>
-    </div>
-    <div>
-      Count
-      <sl-input></sl-input>
-    </div>
-    <div id="list_edit_okcancel_button">
-      <sl-button id="list_edit_cancel_button" variant="success" size="small">취소</sl-button>
-      <sl-button id="list_edit_ok_button" variant="success" size="small">확인</sl-button>
+      <div>
+        Text long
+        <sl-textarea></sl-textarea>
+      </div>
+      <div>
+        Count
+        <sl-input></sl-input>
+      </div>
+      <div id="list_edit_okcancel_button">
+        <sl-button id="list_edit_cancel_button" variant="success" size="small">취소</sl-button>
+        <sl-button id="list_edit_ok_button" variant="success" size="small">확인</sl-button>
+      </div>
     </div>
   </div>
   </div>
