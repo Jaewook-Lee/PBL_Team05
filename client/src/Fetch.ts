@@ -16,7 +16,7 @@ export interface AdList {
     }
 }
 
-export type DeleteAdResult = GenericResponse
+export type DeleteAdResult = GenericResponse;
 
 export enum Gender {
     male = 1 << 0,
@@ -39,9 +39,9 @@ export interface CreateAdResult extends GenericResponse {
     adId?: number
 }
 
-export type ActiveAdResult = GenericResponse
+export type ActiveAdResult = GenericResponse;
 
-export type UploadContentsResult = GenericResponse
+export type UploadContentsResult = GenericResponse;
 
 
 export class Fetch {
