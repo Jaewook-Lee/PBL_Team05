@@ -127,7 +127,7 @@ function createAd(req: Request, res: Response){
     }
 }
 
-//deactivate도 필요할듯.
+//todo deactivate도 필요할듯.
 //post
 function activeAd (req: Request, res: Response) {
     connection.query(`insert into active_ads (id) values (${req.body.adId});`,function (err){

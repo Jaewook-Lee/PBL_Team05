@@ -132,7 +132,7 @@ function createAd(req, res) {
     }
 }
 exports.createAd = createAd;
-//deactivate도 필요할듯.
+//todo deactivate도 필요할듯.
 //post
 function activeAd(req, res) {
     connection.query(`insert into active_ads (id) values (${req.body.adId});`, function (err) {
