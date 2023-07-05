@@ -86,7 +86,7 @@ export class Fetch {
             country: country,
             gender: gender.toString()
         });
-        const response = await fetch(`${this._entry}/test/requestList?${query}`, {
+        const response = await fetch(`${this._entry}/AD/requestList?${query}`, {
             method: "GET"
         });
 
