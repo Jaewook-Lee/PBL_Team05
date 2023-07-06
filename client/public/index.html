@@ -1,201 +1,267 @@
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
 
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>client</title>
-  <link rel="icon" href="data:,">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/themes/light.css" />
-  <script type="module"
-    src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/shoelace-autoloader.js"></script>
-
-
-</head>
-
-<body>
-  <!-- 첫번째 화면 -->
-  <div id="first_screen">
-    <div id="AD_Management_Platform_AD_List">
-      <b>AD Management Platform - AD List</b>
-    </div>
-    <div>
-      <sl-button id="ADD" type="button" variant="warning">ADD</sl-button>
-      <sl-button id="ADTest" type="button" variant="success">AD Test</sl-button>
-    </div>
-    <div></div>
-    <div id="SearchingType">
-      <sl-dropdown>
-        <sl-button slot="trigger" caret>검색타입</sl-button>
-        <sl-menu>
-          <sl-menu-item>Dropdown Item 1</sl-menu-item>
-          <sl-menu-item>Dropdown Item 2</sl-menu-item>
-          <sl-menu-item>Dropdown Item 3</sl-menu-item>
-        </sl-menu>
-      </sl-dropdown>
-      <sl-input placeholder="검색어"></sl-input>
-      <sl-button type="button" variant="primary">검색</sl-button>
-    </div>
-    <table border="1" id="big_table">
-      <thead>
-        <div id="table_head">
-          <tr>
-            <th width="90px">idx</th>
-            <th width="190px">title</th>
-            <th width="430px">Exposure datetime</th>
-            <th width="80px">count</th>
-            <th width="300px">regdate</th>
-            <th width="200px">action</th>
-            <th width="30px">active</th>
-          </tr>
-        </div>
-      </thead>
-      <tbody>
-        <div id="first_table">
-          <tr>
-            <td>1</td>
-            <td>현대자동차</td>
-            <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
-            <td>1000</td>
-            <td>2023/05/05 12:00:00</td>
-            <td>
-              <sl-button class = "detail" size="small">상세</sl-button>
-              <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td>
-            <td>O</td>
-          </tr>
-        </div>
-        <div id="second_table">
-          <tr>
-            <td>2</td>
-            <td>삼성 갤럭시 100</td>
-            <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
-            <td>1000</td>
-            <td>2023/05/05 12:00:00</td>
-            <td>
-              <sl-button class = "detail"size="small">상세</sl-button>
-              <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td>
-            <td>O</td>
-          </tr>
-        </div>
-        <div id="third_table">
-          <tr>
-            <td>3</td>
-            <td>노동부 일잘러</td>
-            <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
-            <td>1500</td>
-            <td>2023/05/05 12:00:00</td>
-            <td>
-              <sl-button class = "detail" size="small">상세</sl-button>
-              <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td>
-            <td>O</td>
-          </tr>
-        </div>
-        <div id="fourth_table">
-          <tr>
-            <td>4</td>
-            <td>피망 신규게임</td>
-            <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
-            <td>5000</td>
-            <td>2023/05/05 12:00:00</td>
-            <td>
-              <sl-button class = "detail" size="small">상세</sl-button>
-              <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td>
-            <td>O</td>
-          </tr>
-        </div>
-        <div id="fifth_table">
-          <tr>
-            <td>5</td>
-            <td>코드스테이츠 신규강좌</td>
-            <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
-            <td>3000</td>
-            <td>2023/05/05 12:00:00</td>
-            <td>
-              <sl-button class = "detail"size="small">상세</sl-button>
-              <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button class = "delete" size="small">삭제</sl-button>
-            </td>
-            <td>X</td>
-          </tr>
-        </div>
-      </tbody>
-    </table>
-
-    <div id="page_navigation">
-      <a href=""><<</a>
-          <a href="">1</a>
-          <a href="">2</a>
-          <a href="">3</a>
-          <a href="">4</a>
-          <a href="">5</a>
-          <a href="">>></a>
-    </div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>client</title>
+    <link rel="icon" href="data:,">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/themes/light.css" />
+    <script type="module"
+      src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.5.2/cdn/shoelace-autoloader.js"></script>
 
 
-  </div>
+  </head>
 
-  <!-- ad test눌렀을때 뜨는 창-->
-
-  <div id="when_click_adtest">
-    <div id="container">
-      <div class="inner_container" id="up_container">
-        <div>
-          Target
-        </div>
+  <body>
+    <!-- 첫번째 화면 -->
+    <div id="first_screen">
+      <div id="AD_Management_Platform_AD_List">
+        <b>AD Management Platform - AD List</b>
+      </div>
+      <div>
+        <sl-button id="ADD" type="button" variant="warning">ADD</sl-button>
+        <sl-button id="ADTest" type="button" variant="success">AD Test</sl-button>
+      </div>
+      <div></div>
+      <div id="SearchingType">
         <sl-dropdown>
-          <sl-button id="target_type" slot="trigger" caret>Dropdown</sl-button>
+          <sl-button slot="trigger" caret>검색타입</sl-button>
           <sl-menu>
             <sl-menu-item>Dropdown Item 1</sl-menu-item>
             <sl-menu-item>Dropdown Item 2</sl-menu-item>
             <sl-menu-item>Dropdown Item 3</sl-menu-item>
           </sl-menu>
         </sl-dropdown>
-        <sl-input name="first"> </sl-input>
-        <sl-input name="second"> </sl-input>
+        <sl-input placeholder="검색어"></sl-input>
+        <sl-button type="button" variant="primary">검색</sl-button>
+      </div>
+      <table border="1" id="big_table">
+        <thead>
+          <div id="table_head">
+            <tr>
+              <th width="90px">idx</th>
+              <th width="190px">title</th>
+              <th width="430px">Exposure datetime</th>
+              <th width="80px">count</th>
+              <th width="300px">regdate</th>
+              <th width="200px">action</th>
+              <th width="30px">active</th>
+            </tr>
+          </div>
+        </thead>
+        <tbody>
+          <div id="first_table">
+            <tr>
+              <td>1</td>
+              <td>현대자동차</td>
+              <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
+              <td>1000</td>
+              <td>2023/05/05 12:00:00</td>
+              <td>
+                <sl-button class = "detail" size="small">상세</sl-button>
+                <sl-button class="edit" size="small">수정</sl-button>
+                <sl-button class = "delete" size="small">삭제</sl-button>
+              </td>
+              <td>O</td>
+            </tr>
+          </div>
+          <div id="second_table">
+            <tr>
+              <td>2</td>
+              <td>삼성 갤럭시 100</td>
+              <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
+              <td>1000</td>
+              <td>2023/05/05 12:00:00</td>
+              <td>
+                <sl-button class = "detail"size="small">상세</sl-button>
+                <sl-button class="edit" size="small">수정</sl-button>
+                <sl-button class = "delete" size="small">삭제</sl-button>
+              </td>
+              <td>O</td>
+            </tr>
+          </div>
+          <div id="third_table">
+            <tr>
+              <td>3</td>
+              <td>노동부 일잘러</td>
+              <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
+              <td>1500</td>
+              <td>2023/05/05 12:00:00</td>
+              <td>
+                <sl-button class = "detail" size="small">상세</sl-button>
+                <sl-button class="edit" size="small">수정</sl-button>
+                <sl-button class = "delete" size="small">삭제</sl-button>
+              </td>
+              <td>O</td>
+            </tr>
+          </div>
+          <div id="fourth_table">
+            <tr>
+              <td>4</td>
+              <td>피망 신규게임</td>
+              <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
+              <td>5000</td>
+              <td>2023/05/05 12:00:00</td>
+              <td>
+                <sl-button class = "detail" size="small">상세</sl-button>
+                <sl-button class="edit" size="small">수정</sl-button>
+                <sl-button class = "delete" size="small">삭제</sl-button>
+              </td>
+              <td>O</td>
+            </tr>
+          </div>
+          <div id="fifth_table">
+            <tr>
+              <td>5</td>
+              <td>코드스테이츠 신규강좌</td>
+              <td>2023 06 25 00:00:00 ~ 2023 07 01 00:00:00</td>
+              <td>3000</td>
+              <td>2023/05/05 12:00:00</td>
+              <td>
+                <sl-button class = "detail"size="small">상세</sl-button>
+                <sl-button class="edit" size="small">수정</sl-button>
+                <sl-button class = "delete" size="small">삭제</sl-button>
+              </td>
+              <td>X</td>
+            </tr>
+          </div>
+        </tbody>
+      </table>
 
-        <sl-button type="button" variant="success">전 송</sl-button>
-
+      <div id="page_navigation">
+        <a href=""><<</a>
+            <a href="">1</a>
+            <a href="">2</a>
+            <a href="">3</a>
+            <a href="">4</a>
+            <a href="">5</a>
+            <a href="">>></a>
       </div>
 
-      <div class="inner_container" id="down_container">
-        <div>
-          Result
-        </div>
-        <sl-textarea></sl-textarea>
-        <div id="two_row_button">
-          <sl-button id="web_view" type="button" variant="warning">Web view</sl-button>
-          <sl-button id="ADDTEST_ok_button" type="button" variant="success">확 인</sl-button>
-        </div>
 
-      </div>
     </div>
-  </div>
 
-  <!-- ADD 누르면 나오는 창 -->
+    <!-- ad test눌렀을때 뜨는 창-->
 
-  <div id="when_click_ADD">
-    <div id="ADD_big_container">
-      <div id="add_first_container">
-        <sl-dropdown>
-          <sl-button id="add_first_dropdown" slot="trigger" caret>Dropdown</sl-button>
-          <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
-        <div id="add_second_container"><sl-input></sl-input></div>
-        <div>
+    <div id="when_click_adtest">
+      <div id="container">
+        <div class="inner_container" id="up_container">
+          <div>
+            Target
+          </div>
           <sl-dropdown>
-            <sl-button id="add_second_dropdown" slot="trigger" caret>Dropdown</sl-button>
+            <sl-button id="target_type" slot="trigger" caret>Dropdown</sl-button>
+            <sl-menu>
+              <sl-menu-item>Dropdown Item 1</sl-menu-item>
+              <sl-menu-item>Dropdown Item 2</sl-menu-item>
+              <sl-menu-item>Dropdown Item 3</sl-menu-item>
+            </sl-menu>
+          </sl-dropdown>
+          <sl-input name="first"> </sl-input>
+          <sl-input name="second"> </sl-input>
+
+          <sl-button type="button" variant="success">전 송</sl-button>
+
+        </div>
+
+        <div class="inner_container" id="down_container">
+          <div>
+            Result
+          </div>
+          <sl-textarea></sl-textarea>
+          <div id="two_row_button">
+            <sl-button id="web_view" type="button" variant="warning">Web view</sl-button>
+            <sl-button id="ADDTEST_ok_button" type="button" variant="success">확 인</sl-button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ad test눌렀을때 뜨는 창 => webview 눌렀을때 뜨는 창-->
+    <!-- <div id="when_click_webview">
+      <div id="webview_container">
+        <div class="inner_container" id="up_container">
+          <div id="webview_first_container">
+            <img src="https://images-ext-1.discordapp.net/external/hrLr0F2FI4D92h5Xm_qPJY2c3e_idqG7EVBS_yLXMbY/http/13.125.111.160%3A8000/pic1.jpeg?width=488&height=488">
+          </div>
+          <div>
+            Result
+            <sl-input name="result_input1"> </sl-input>
+          </div>
+    
+        </div>
+        <div class="inner_container" id="down_container">
+          <div id = "webview_second_container">
+            <sl-input name="img_column2"> </sl-input>
+          </div>
+          <div>
+          Result
+            <sl-input name="result_input2"> </sl-input>
+          </div>
+        </div>
+        <div>
+          <sl-button id="list_detail_ok_button" variant="success" size="small">확인</sl-button> 
+        </div>
+      </div>
+    </div> -->
+
+    <!-- ADD 누르면 나오는 창 --> 
+
+    <div id="when_click_ADD">
+      <div id="ADD_big_container">
+        <div id="add_first_container">
+          <sl-dropdown>
+            <sl-button id="add_first_dropdown" slot="trigger" caret>Dropdown</sl-button>
+            <sl-menu>
+              <sl-menu-item>Dropdown Item 1</sl-menu-item>
+              <sl-menu-item>Dropdown Item 2</sl-menu-item>
+              <sl-menu-item>Dropdown Item 3</sl-menu-item>
+            </sl-menu>
+          </sl-dropdown>
+          <div id="add_second_container"><sl-input></sl-input></div>
+          <div>
+            <sl-dropdown>
+              <sl-button id="add_second_dropdown" slot="trigger" caret>Dropdown</sl-button>
+              <sl-menu>
+                <sl-menu-item>Dropdown Item 1</sl-menu-item>
+                <sl-menu-item>Dropdown Item 2</sl-menu-item>
+                <sl-menu-item>Dropdown Item 3</sl-menu-item>
+              </sl-menu>
+            </sl-dropdown>
+          </div>
+          <div id="add_fourth_container">
+            <sl-textarea></sl-textarea>
+          </div>
+        </div>
+        <div id="ADD_okcancel_button">
+          <sl-button id="ADD_cancel_button" variant="success" size="small">취소</sl-button>
+          <sl-button id="ADD_ok_button" variant="success" size="small">확인</sl-button>
+        </div>
+      </div>
+    </div>
+    <!-- 상세 누르면 나오는 창 -->
+
+    <div id = "when_click_detail">
+        <div id = "clicked_detail">
+          <b>API Result Json String</b>
+          <sl-textarea rows="12" cols="50" id = click_detail_textarea></sl-textarea>
+          <div id="list_detail_okcancel_button">
+          <sl-button id="list_detail_cancel_button" variant="success" size="small">취소</sl-button>
+          <sl-button id="list_detail_ok_button" variant="success" size="small">확인</sl-button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- 수정 누르면 나오는 창  -->
+    <div id="when_click_edit">
+      <div id="clicked_edit">
+        <div id="list_edit_dropdown1">
+          <div>Type</div>
+          <sl-dropdown>
+            <sl-button id="list_in_dropdown" slot="trigger" caret>Dropdown</sl-button>
             <sl-menu>
               <sl-menu-item>Dropdown Item 1</sl-menu-item>
               <sl-menu-item>Dropdown Item 2</sl-menu-item>
@@ -203,83 +269,44 @@
             </sl-menu>
           </sl-dropdown>
         </div>
-        <div id="add_fourth_container">
+        <div id="list_edit_input1">
+          Title
+          <sl-input></sl-input>
+        </div>
+        <div>
+          Text short
+          <sl-input></sl-input>
+        </div>
+
+        <div>
+          Text long
           <sl-textarea></sl-textarea>
         </div>
-      </div>
-      <div id="ADD_okcancel_button">
-        <sl-button id="ADD_cancel_button" variant="success" size="small">취소</sl-button>
-        <sl-button id="ADD_ok_button" variant="success" size="small">확인</sl-button>
-      </div>
-    </div>
-  </div>
-  <!-- 상세 누르면 나오는 창 -->
-
-  <div id = "when_click_detail">
-      <div id = "clicked_detail">
-        <b>API Result Json String</b>
-        <sl-textarea rows="12" cols="50" id = click_detail_textarea></sl-textarea>
-        <div id="list_detail_okcancel_button">
-        <sl-button id="list_detail_cancel_button" variant="success" size="small">취소</sl-button>
-        <sl-button id="list_detail_ok_button" variant="success" size="small">확인</sl-button>
-      </div>
-    </div>
-  </div>
-
-
-
-  <!-- 수정 누르면 나오는 창  -->
-  <div id="when_click_edit">
-    <div id="clicked_edit">
-      <div id="list_edit_dropdown1">
-        <div>Type</div>
-        <sl-dropdown>
-          <sl-button id="list_in_dropdown" slot="trigger" caret>Dropdown</sl-button>
-          <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
-      </div>
-      <div id="list_edit_input1">
-        Title
-        <sl-input></sl-input>
-      </div>
-      <div>
-        Text short
-        <sl-input></sl-input>
-      </div>
-
-      <div>
-        Text long
-        <sl-textarea></sl-textarea>
-      </div>
-      <div>
-        Cou nt
-        <sl-input></sl-input>
-      </div>
-      <div id="list_edit_okcancel_button">
-        <sl-button id="list_edit_cancel_button" variant="success" size="small">취소</sl-button>
-        <sl-button id="list_edit_ok_button" variant="success" size="small">확인</sl-button>
-      </div>
-    </div>
-  </div>
-
-  <!-- 삭제를 눌렀을때 -->
-  <div id = "when_click_delete">
-    <div id = "click_delete">
-        <div id = "delete_white_screen">
-          <b>삭제하시겠습니까?</b>
+        <div>
+          Cou nt
+          <sl-input></sl-input>
         </div>
-        <div id = "list_delete_okcancel_button">
-          <sl-button id="list_delete_cancel_button" variant="success" size="small">취소</sl-button>
-          <sl-button id="list_delete_ok_button" variant="success" size="small">확인</sl-button>
+        <div id="list_edit_okcancel_button">
+          <sl-button id="list_edit_cancel_button" variant="success" size="small">취소</sl-button>
+          <sl-button id="list_edit_ok_button" variant="success" size="small">확인</sl-button>
         </div>
-    </div> 
-  </div>
+      </div>
+    </div>
+
+    <!-- 삭제를 눌렀을때 -->
+    <div id = "when_click_delete">
+      <div id = "click_delete">
+          <div id = "delete_white_screen">
+            <b>삭제하시겠습니까?</b>
+          </div>
+          <div id = "list_delete_okcancel_button">
+            <sl-button id="list_delete_cancel_button" variant="success" size="small">취소</sl-button>
+            <sl-button id="list_delete_ok_button" variant="success" size="small">확인</sl-button>
+          </div>
+      </div> 
+    </div>
 
 
-</body>
+  </body>
 
-</html>
+  </html>

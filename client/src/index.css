@@ -83,7 +83,7 @@
     border: solid 2px white;
 
     width: calc(100% - 40px);
-    height: calc(50% - 30px);
+    height: calc(50% - 50px);
 
     box-sizing: border-box;
 
@@ -349,3 +349,34 @@ body {
     align-items: center;
     justify-content: space-around;
 }
+
+/* webview눌렀을때 */
+#when_click_webview {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+#webview_container {
+    background-color: blue;
+    width: 350px;
+    height: 600px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
+
