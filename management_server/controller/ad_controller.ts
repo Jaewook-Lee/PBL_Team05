@@ -93,6 +93,7 @@ function readAd (req: Request, res: Response) {
 //delete
 function deleteAd (req: Request, res: Response) {
     console.log(req.body);
+    console.log(req);
     if (req.body ={}){
         res.json({
             status: "fail",
