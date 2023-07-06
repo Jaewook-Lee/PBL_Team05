@@ -16,7 +16,7 @@ app.use('/test',testRouter);
 // 사진보내기 테스트 겸 기본화면
 app.get('/',(req : Request, res : Response)=>{
     const photoPath : string = 'pic1.jpeg';
-    res.sendFile(photoPath, {root : '..'}); // root 잘 확인해야될듯
+    res.sendFile(photoPath, {root : './'}); // root 잘 확인해야될듯
 });
 
 
