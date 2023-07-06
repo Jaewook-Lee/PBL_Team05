@@ -141,7 +141,25 @@ function activeModel(req: Request, res: Response){
 }
 
 function updateAdModel(req: Request, res: Response){
-    connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`,
+    var parameterList = ["name","advertizer","createdAt","country","gender","periodBegin","periodEnd","maxViewCount"]
+    var sqlQuery : string = `update ads set `
+    var queryList = [`name = "${req.body.name}",`,`advertizer="${req.body.advertizer}",`,`create_at="${req.body.createdAt}",`,
+    `country="${req.body.country}",`,`gender="${req.body.gender}",`,`period_begin="${req.body.periodBegin}",`,`period_end="${req.body.periodEnd}",`,
+    `period_end="${req.body.periodEnd}",`,`max_view_count= "${req.body.maxViewCount}"`]
+    console.log(req.body[parameterList[5]]);
+    for (let i = 0 ; i< parameterList.length;i++){
+        if(req.body[parameterList[i]] != undefined){
+            sqlQuery += queryList[i];
+        }
+    }
+    if (sqlQuery.charAt(sqlQuery.length - 1)==","){
+        sqlQuery = sqlQuery.slice(0,-1);
+    }
+
+    sqlQuery +=` where id = "${req.body.adId}"`;
+    console.log(sqlQuery);
+
+    connection.query(sqlQuery,
         function(err : Error){
             if(err){
                 console.log(err)

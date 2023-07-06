@@ -1,4 +1,4 @@
-import express, {Express, Request, Response} from "express";
+import express, {Express} from "express";
 import adRoutes from './routes/ad'
 import picRouter from './routes/pic'
 const port : Number = 8000;

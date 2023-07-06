@@ -75,6 +75,7 @@ exports.activeAd = activeAd;
 //todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd(req, res) {
+    console.log(req.body);
     (0, ad_model_1.updateAdModel)(req, res);
 }
 exports.updateAd = updateAd;

@@ -64,6 +64,7 @@ function activeAd (req: Request, res: Response) {
 //todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd (req: Request, res: Response) {
+    console.log(req.body);
     updateAdModel(req,res);
 }
 
