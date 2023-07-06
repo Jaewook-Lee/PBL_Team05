@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import mysql from 'mysql';
-import iso from 'iso-3166-1';
 import dotenv from 'dotenv';
 import path from 'path';
 
