@@ -92,6 +92,7 @@ exports.uploadContents = uploadContents;
 //todo Error control
 function requestAdminList(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
+        console.log(req);
         if (req.query.offset == undefined && req.query.length == undefined) {
             res.json({ status: "error", message: "필수 파라미터 (offset,length) Error" });
             return;

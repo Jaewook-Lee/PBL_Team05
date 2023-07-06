@@ -80,6 +80,7 @@ function uploadContents (req: Request, res: Response) {
 
 //todo Error control
 async function requestAdminList(req:Request, res:Response){
+    console.log(req);
     if(req.query.offset == undefined && req.query.length == undefined){
         res.json({status : "error", message : "필수 파라미터 (offset,length) Error"})
         return;
