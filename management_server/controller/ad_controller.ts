@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
-import iso from 'iso-3166-1';
+// import iso from 'iso-3166-1';
+import { country2Num } from '../utility/countryToNum';
 import { checkUndefined } from '../utility/chkParams';
 import { activeModel, createAdModel, deleteAdModel, readAdModel, requestAdminListModel, requestListModel, updateAdModel } from '../model/ad_model';
 
@@ -30,14 +31,13 @@ function createAd(req: Request, res: Response){
     if (!checkUndefined(req.body, paramNames, res)) { return; }
     
     // Parsing country name to numeric country code
-    const countryName : string = req.body.country;
-    const isoAllData = iso.all();
-    let countryCode : Number = -1;
-    for (let i : number = 0; i < isoAllData.length; i++) {
-        if (countryName === isoAllData[i].country) {
-            countryCode = Number(isoAllData[i].numeric);
-            break;
-        }
+    const countryCode: number = country2Num(req.body.country);
+    if (countryCode === -1) {
+        res.json({
+            "status": "fail",
+            "message": "존재하지 않는 국가"
+        });
+        return;
     }
     createAdModel(req,res,countryCode);
 }
