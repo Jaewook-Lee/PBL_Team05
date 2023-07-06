@@ -1,11 +1,8 @@
 import { AdListView } from "./AdListView";
-import { DetailPanelView } from "./DetailPanelView";
 import css from "./index.css";
 css;
 
-const detailPanelView = new DetailPanelView();
-
-const adListView = new AdListView(detailPanelView);
+const adListView = new AdListView();
 adListView.initialize();
 
 // ADDTest 눌렀을때
@@ -57,3 +54,4 @@ deletePopupCloseButton.onclick = () => {
     deletePanel.style.display = 'none';
 };
 
+//webview 눌렀을때
