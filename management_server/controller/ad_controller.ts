@@ -1,5 +1,4 @@
 import { Request, Response } from 'express';
-// import iso from 'iso-3166-1';
 import { country2Num } from '../utility/countryToNum';
 import { checkUndefined } from '../utility/chkParams';
 import { activeModel, createAdModel, deleteAdModel, readAdModel, requestAdminListModel, requestListModel, updateAdModel } from '../model/ad_model';
@@ -8,27 +7,54 @@ import { activeModel, createAdModel, deleteAdModel, readAdModel, requestAdminLis
 // ad 정렬해서 filtering하는 기능이 필요 할 듯.
 //get
 function requestList (req: Request, res: Response) {
-    if (!checkUndefined(req.query, ["gender", "country"], res)) { return; }
+    const paramNames = ["gender", "country"];
+    if (!checkUndefined(req.query, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     requestListModel(req,res);
 }
 
 // db및 api 수정필요.
 //get
 function readAd (req: Request, res: Response) {
-    if (!checkUndefined(req.query, ["adId"], res)) { return; }
+    const paramNames = ["adId"];
+    if (!checkUndefined(req.query, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     readAdModel(req, res);
 }
 
 //delete
 function deleteAd (req: Request, res: Response) {
-    if (!checkUndefined(req.body, ["adId"], res)) { return; }
+    const paramNames = ["adId"];
+    if (!checkUndefined(req.body, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     deleteAdModel(req,res);
 }
 
 //post
 function createAd(req: Request, res: Response){
     const paramNames: string[] = ["name", "advertizer", "createdAt", "country", "gender", "periodBegin", "periodEnd", "maxViewCount"];
-    if (!checkUndefined(req.body, paramNames, res)) { return; }
+    if (!checkUndefined(req.body, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     
     // Parsing country name to numeric country code
     const countryCode: number = country2Num(req.body.country);
@@ -45,7 +71,14 @@ function createAd(req: Request, res: Response){
 //todo deactivate도 필요할듯.
 //post
 function activeAd (req: Request, res: Response) {
-    if (!checkUndefined(req.body, ["adId"], res)) { return; }
+    const paramNames: string[] = ["adId"];
+    if (!checkUndefined(req.body, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     activeModel(req,res);
 }
 
@@ -70,7 +103,14 @@ function uploadContents (req: Request, res: Response) {
 
 //todo Error control
 async function requestAdminList(req:Request, res:Response){
-    if (!checkUndefined(req.query, ["offset", "length"], res)) { return; }
+    const paramNames: string[] = ["offset", "length"];
+    if (!checkUndefined(req.body, paramNames)) {
+        res.json({
+            status : "error",
+            message : `필수 파라미터(${paramNames}) 없음`
+        });
+        return;
+    }
     requestAdminListModel(req,res);
 }
 
