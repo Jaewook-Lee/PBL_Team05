@@ -24,4 +24,67 @@ function requestList (req: Request, res: Response) {
     });
 }
 
-export {requestList} ;
+function readAd(req : Request, res : Response){
+    res.send({stauts: "success",
+    data : [{content: "pic1.jpeg",width : "readAd"}]
+})
+}
+
+
+
+function deleteAd(req : Request, res : Response){
+    res.json({stauts: "success", message : ""});
+}
+
+function createAd(req : Request, res : Response){
+    res.json({
+        status: "success",
+        message: "등록에 성공했습니다.",
+        adId: "0000"
+    });
+}
+
+function activeAd(req : Request, res : Response){
+    res.json({
+        status: "success",
+        message: "active Success!"
+    });
+}
+
+async function requestAdminList(req : Request, res : Response){
+    var data :Object;
+    var count : any = [];
+    await new Promise<void>((resolve) => {
+        connection.query(`select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+            }
+            data= result;
+            resolve();
+        })
+    });
+
+    await new Promise<void>((resolve) => {
+        connection.query(`select count(*) as adCount from ads`,
+        function(err : Error, result : any){
+            if(err){
+                console.log(err);
+                res.json({
+                    status : "error"
+                })  
+                return
+            }
+            count= result;
+            resolve();
+        })
+    });
+    res.json({adCount : count[0].adCount ,data : data!});
+    
+}
+
+
+export {requestList,readAd,deleteAd,createAd,activeAd,requestAdminList} ;

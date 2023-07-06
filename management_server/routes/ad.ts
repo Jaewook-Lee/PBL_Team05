@@ -1,13 +1,14 @@
 import { Router } from "express";
 import { requestList, deleteAd, readAd, createAd, activeAd, updateAd, uploadContents, requestAdminList } from "../controller/ad_controller";
-
+import cors from "cors"
 
 const router : Router = Router();
-router.all('/*', function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "X-Requested-With");
-    next();
-  });
+router.use(cors());
+// router.all('/*', function(req, res, next) {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "X-Requested-With");
+//     next();
+//   });
 
 
 router.get('/requestList', requestList);    // 이건 user가 list를 달라고 하는건데 더미코드가 필요해 여기 있는것
