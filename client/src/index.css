@@ -69,7 +69,7 @@
 
 /* ad test 눌렀을때 뜨는 창 */
 #container {
-    background-color: blue;
+    background-color: rgb(206, 206, 226);
     width: 350px;
     height: 600px;
 
@@ -171,7 +171,7 @@ body {
 }
 
 #ADD_big_container {
-    background-color: blue;
+    background-color: rgb(175, 175, 191);
     width: 350px;
     height: 440px;
 
@@ -258,7 +258,7 @@ body {
 }
 
 #clicked_detail{
-    background-color: blue;
+    background-color: rgb(213, 213, 231);
     width: 350px;
     height: 440px;
 
@@ -289,7 +289,7 @@ body {
     display: none;
 }
 #clicked_edit{
-    background-color: blue;
+    background-color: rgb(218, 218, 227);
     width: 350px;
     height: 440px;
 
@@ -339,7 +339,7 @@ body {
 
 
 #click_delete{
-    background-color: blue;
+    background-color: rgb(193, 193, 221);
     width: 350px;
     height: 200px;
 
@@ -371,7 +371,7 @@ body {
 }
 
 #webview_container {
-    background-color: blue;
+    background-color: rgb(192, 192, 212);
     width: 350px;
     height: 600px;
 

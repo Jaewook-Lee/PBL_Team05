@@ -28,9 +28,8 @@
       <sl-dropdown>
         <sl-button slot="trigger" caret>검색타입</sl-button>
         <sl-menu>
-          <sl-menu-item>Dropdown Item 1</sl-menu-item>
-          <sl-menu-item>Dropdown Item 2</sl-menu-item>
-          <sl-menu-item>Dropdown Item 3</sl-menu-item>
+          <sl-menu-item>idx</sl-menu-item>
+          <sl-menu-item>title</sl-menu-item>
         </sl-menu>
       </sl-dropdown>
       <sl-input placeholder="검색어"></sl-input>
@@ -151,11 +150,11 @@
           Target
         </div>
         <sl-dropdown>
-          <sl-button id="target_type" slot="trigger" caret>Dropdown</sl-button>
+          <sl-button id="target_type" slot="trigger" caret>유형 선택</sl-button>
           <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
+            <sl-menu-item>사진</sl-menu-item>
+            <sl-menu-item>영상</sl-menu-item>
+            <sl-menu-item>글</sl-menu-item>
           </sl-menu>
         </sl-dropdown>
         <sl-input name="first"> </sl-input>
@@ -211,27 +210,20 @@
   <div id="when_click_ADD">
     <div id="ADD_big_container">
       <div id="add_first_container">
-        <sl-dropdown>
-          <sl-button id="add_first_dropdown" slot="trigger" caret>Dropdown</sl-button>
-          <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
+        <div>제목</div>
         <div id="add_second_container"><sl-input></sl-input></div>
         <div>
-          <sl-dropdown>
-            <sl-button id="add_second_dropdown" slot="trigger" caret>Dropdown</sl-button>
-            <sl-menu>
-              <sl-menu-item>Dropdown Item 1</sl-menu-item>
-              <sl-menu-item>Dropdown Item 2</sl-menu-item>
-              <sl-menu-item>Dropdown Item 3</sl-menu-item>
-            </sl-menu>
-          </sl-dropdown>
+          광고 시작 날짜 
+          <div><input type="date" id="datepicker" name="datepicker"></div>
         </div>
-        <div id="add_fourth_container">
-          <sl-textarea></sl-textarea>
+        <div>
+          광고 종료 날짜 
+          <div><input type="date" id="datepicker" name="datepicker"></div>
+          
+        </div>
+        <div>
+          Count
+          <sl-input></sl-input>
         </div>
       </div>
       <div id="ADD_okcancel_button">
@@ -258,32 +250,20 @@
   <!-- 수정 누르면 나오는 창  -->
   <div id="when_click_edit">
     <div id="clicked_edit">
-      <div id="list_edit_dropdown1">
-        <div>Type</div>
-        <sl-dropdown>
-          <sl-button id="list_in_dropdown" slot="trigger" caret>Dropdown</sl-button>
-          <sl-menu>
-            <sl-menu-item>Dropdown Item 1</sl-menu-item>
-            <sl-menu-item>Dropdown Item 2</sl-menu-item>
-            <sl-menu-item>Dropdown Item 3</sl-menu-item>
-          </sl-menu>
-        </sl-dropdown>
-      </div>
       <div id="list_edit_input1">
         Title
         <sl-input></sl-input>
       </div>
       <div>
-        Text short
-        <sl-input></sl-input>
-      </div>
-
-      <div>
-        Text long
-        <sl-textarea></sl-textarea>
+        광고 시작 날짜
+          <div><input type="date" id="datepicker" name="datepicker"></div>
       </div>
       <div>
-        Cou nt
+        광고 종료 날짜
+          <div><input type="date" id="datepicker" name="datepicker"></div>
+      </div>
+      <div>
+        Count
         <sl-input></sl-input>
       </div>
       <div id="list_edit_okcancel_button">
