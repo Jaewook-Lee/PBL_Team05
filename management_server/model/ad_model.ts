@@ -27,7 +27,8 @@ connection.connect ((error)=>{
     }
     console.log('db connect success')
 });
-function requestListModel(req: Request, res: Response){
+
+function requestListModel(req: Request, res: Response){   
     connection.query(`select * from ads where gender = '${req.query.gender}' and country  = "${req.body.country}";`,function(err : Error, result : any){
         if (err){
             console.log(err);
@@ -37,8 +38,8 @@ function requestListModel(req: Request, res: Response){
             });
             return;
         }
+
         res.json(result);
-        return;
     });
 }
 
@@ -228,4 +229,5 @@ async function requestAdminListModel(req: Request, res: Response){
     
     res.json({adCount : count[0].adCount ,data : data!});
 }
+
 export {requestListModel,readAdModel,deleteAdModel,createAdModel,activeModel,updateAdModel,requestAdminListModel};
