@@ -45,7 +45,7 @@ function readAd (req: Request, res: Response) {
             message : "조회에 실패했습니다."
         });
     } else {
-        connection.query(`select ads.name, ads.period_begin, ads.period_end, ads.advertizer, ads.country, ad_contents_data.type, ad_statics.hit_count, ad_statics.hit_time_sum from ads inner join ad_contents_data on ads.id = ad_contents_data.id inner join ad_statics on ads.id = ad_statics.id where ads.id = ${req.query.adId}`, 
+        connection.query(`select ads.name, ad_contents_data.contents, ads.period_begin, ads.period_end, ads.advertizer, ads.country, ad_contents_data.type, ad_statics.hit_count, ad_statics.hit_time_sum from ads inner join ad_contents_data on ads.id = ad_contents_data.id inner join ad_statics on ads.id = ad_statics.id where ads.id = ${req.query.adId}`, 
         function(err : Error, result : any) {
             // DB 조회 과정에서 에러가 나거나, row 수가 0일 경우(JOIN 결과 row가 0개일 수 있다.) 실패 메시지 전달
             if (err || result.length === 0) {
@@ -66,6 +66,7 @@ function readAd (req: Request, res: Response) {
                 
                 res.json({
                     "adName": result[0].name,
+                    "contents": result[0].contents,
                     "period": period,
                     "advertiser": result[0].advertizer,
                     "language": result[0].country,
