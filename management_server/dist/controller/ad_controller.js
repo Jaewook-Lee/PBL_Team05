@@ -13,49 +13,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestAdminList = exports.requestList = exports.uploadContents = exports.updateAd = exports.activeAd = exports.createAd = exports.readAd = exports.deleteAd = void 0;
-const mysql_1 = __importDefault(require("mysql"));
 const iso_3166_1_1 = __importDefault(require("iso-3166-1"));
-const dotenv_1 = __importDefault(require("dotenv"));
-const path_1 = __importDefault(require("path"));
-// 환경 변수가 저장된 .env 파일 로딩
-// 실패하면 에러 반환
-const result = dotenv_1.default.config({ path: path_1.default.join(__dirname, "../..", ".env") });
-if (result.parsed === undefined) {
-    throw new Error("Can't load env file!");
-}
-else {
-    console.log("Load env file complete");
-}
-//db connector
-const connection = mysql_1.default.createConnection({
-    host: process.env.MYSQL_HOST,
-    port: Number(process.env.MYSQL_PORT),
-    user: process.env.MYSQL_USER,
-    password: process.env.MYSQL_PW,
-    database: process.env.MYSQL_DB_NAME
-});
-connection.connect((error) => {
-    if (error) {
-        console.error('fail to connect', error);
-        return;
-    }
-    console.log('db connect success');
-});
+const ad_model_1 = require("../model/ad_model");
 // ad 정렬해서 filtering하는 기능이 필요 할 듯.
 //get
 function requestList(req, res) {
-    connection.query(`select * from ads where gender = '${req.query.gender}' and country  = "${req.body.country}";`, function (err, result) {
-        if (err) {
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "불러오기에 실패했습니다.."
-            });
-        }
-        else {
-            res.json(result);
-        }
-    });
+    (0, ad_model_1.requestListModel)(req, res);
 }
 exports.requestList = requestList;
 // db및 api 수정필요.
@@ -66,62 +29,16 @@ function readAd(req, res) {
             status: "fail",
             message: "조회에 실패했습니다."
         });
+        return;
     }
-    else {
-        connection.query(`select ads.name, ad_contents_data.contents, ads.period_begin, ads.period_end, ads.advertizer, ads.country, ad_contents_data.type, ad_statics.hit_count, ad_statics.hit_time_sum from ads inner join ad_contents_data on ads.id = ad_contents_data.id inner join ad_statics on ads.id = ad_statics.id where ads.id = ${req.query.adId}`, function (err, result) {
-            // DB 조회 과정에서 에러가 나거나, row 수가 0일 경우(JOIN 결과 row가 0개일 수 있다.) 실패 메시지 전달
-            if (err || result.length === 0) {
-                console.log(err);
-                console.log(`Result rows: ${result}`);
-                res.json({
-                    status: "fail",
-                    message: "조회에 실패했습니다."
-                });
-            }
-            else {
-                const startDay = result[0].period_begin;
-                const startYear = startDay.getFullYear();
-                const startMonth = startDay.getMonth();
-                const startDate = startDay.getDate();
-                const endDay = result[0].period_end;
-                const endYear = endDay.getFullYear();
-                const endMonth = endDay.getMonth();
-                const endDate = endDay.getDate();
-                const period = `${startYear}-${startMonth}-${startDate} ~ ${endYear}-${endMonth}-${endDate}`;
-                res.json({
-                    "adName": result[0].name,
-                    "contents": result[0].contents,
-                    "period": period,
-                    "advertiser": result[0].advertizer,
-                    "language": result[0].country,
-                    "adType": result[0].type,
-                    "hitCount": result[0].hit_count,
-                    "watchTimeSum": result[0].hit_count_sum
-                });
-            }
-        });
-    }
+    (0, ad_model_1.readAdModel)(req, res);
 }
 exports.readAd = readAd;
 //delete
 function deleteAd(req, res) {
     console.log(req.body);
-    connection.query(`delete from ads where id = "${req.body.adId}"`, function (err) {
-        if (err) {
-            //todo : id가 없을 경우 삭제를 안하는데 성공으로 메시지가 전달되긴 함.
-            res.json({
-                status: "fail",
-                message: "삭제에 실패했습니다."
-            });
-            console.log(err);
-        }
-        else {
-            res.json({
-                status: "success",
-                message: "삭제에 성공했습니다."
-            });
-        }
-    });
+    console.log(req);
+    (0, ad_model_1.deleteAdModel)(req, res);
 }
 exports.deleteAd = deleteAd;
 //post
@@ -133,80 +50,32 @@ function createAd(req, res) {
             "status": "fail",
             "message": "잘못된 데이터가 입력되었습니다."
         });
+        return;
     }
-    else {
-        // Parsing country name to numeric country code
-        const countryName = params.country;
-        const isoAllData = iso_3166_1_1.default.all();
-        let countryCode = -1;
-        for (let i = 0; i < isoAllData.length; i++) {
-            if (countryName === isoAllData[i].country) {
-                countryCode = Number(isoAllData[i].numeric);
-                break;
-            }
+    // Parsing country name to numeric country code
+    const countryName = params.country;
+    const isoAllData = iso_3166_1_1.default.all();
+    let countryCode = -1;
+    for (let i = 0; i < isoAllData.length; i++) {
+        if (countryName === isoAllData[i].country) {
+            countryCode = Number(isoAllData[i].numeric);
+            break;
         }
-        connection.query(`Insert into ads (name,advertizer,create_at,country,gender,period_begin,period_end,max_view_count) 
-        values ("${req.body.name}","${req.body.advertizer}","${req.body.createdAt}","${countryCode}","${req.body.gender}","${req.body.periodBegin}",
-        "${req.body.periodEnd}","${req.body.maxViewCount}")`, (err) => {
-            if (err) {
-                console.log(err);
-                res.json({
-                    status: "fail",
-                    message: "등록에 실패했습니다."
-                });
-            }
-            else {
-                connection.query(`select id as adId from ads where name = "${req.body.name}" order by create_at desc`, (err, result) => {
-                    res.json({
-                        status: "success",
-                        message: "등록에 성공했습니다.",
-                        adId: result[0].adId
-                    });
-                });
-            }
-        });
     }
+    (0, ad_model_1.createAdModel)(req, res, countryCode);
 }
 exports.createAd = createAd;
 //todo deactivate도 필요할듯.
 //post
 function activeAd(req, res) {
-    connection.query(`insert into active_ads (id) values (${req.body.adId});`, function (err) {
-        if (err) {
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "active fail!"
-            });
-        }
-        else {
-            res.json({
-                status: "success",
-                message: "active Success!"
-            });
-        }
-    });
+    (0, ad_model_1.activeModel)(req, res);
 }
 exports.activeAd = activeAd;
 //put
 //todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd(req, res) {
-    connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`, function (err) {
-        if (err) {
-            console.log(err);
-            res.json({
-                status: "fail",
-                message: "수정에 실패했습니다."
-            });
-        }
-        else {
-            res.json({
-                status: "success",
-                message: "수정에 성공했습니다.",
-            });
-        }
-    });
+    updateAd(req, res);
 }
 exports.updateAd = updateAd;
 // file을 받는 tool 필요할듯.
@@ -217,56 +86,17 @@ function uploadContents(req, res) {
         status: "success",
         message: "업로드에 성공했습니다."
     });
+    return;
 }
 exports.uploadContents = uploadContents;
 //todo Error control
 function requestAdminList(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
-        var offset = Number(req.query.offset);
-        var length = Number(req.query.length);
-        if (offset == undefined && length == undefined) {
+        if (req.query.offset == undefined && req.query.length == undefined) {
             res.json({ status: "error", message: "필수 파라미터 (offset,length) Error" });
             return;
         }
-        var type = req.query.type;
-        var search = req.query.search;
-        var sqlQuery = `select ads.id as adId, name, create_at as createAt, period_begin as periodBegin, period_end as periodEnd, max_view_count as maxViewCount,  (Case when active_ads.id Is null then False else True end ) as isActive from ads left join active_ads on ads.id = active_ads.id `;
-        var whereQuery = `where ${type} like "%${search}%"`;
-        if (type != undefined) {
-            sqlQuery += whereQuery;
-        }
-        sqlQuery += ` limit ${offset},${length};`;
-        var data;
-        var count = [];
-        yield new Promise((resolve) => {
-            connection.query(sqlQuery, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    res.json({
-                        status: "error"
-                    });
-                }
-                data = result;
-                resolve();
-            });
-        });
-        var sqlQuery2 = `select count(*) as adCount from ads `;
-        if (type != undefined) {
-            sqlQuery2 += whereQuery;
-        }
-        yield new Promise((resolve) => {
-            connection.query(sqlQuery2, function (err, result) {
-                if (err) {
-                    console.log(err);
-                    res.json({
-                        status: "error"
-                    });
-                }
-                count = result;
-                resolve();
-            });
-        });
-        res.json({ adCount: count[0].adCount, data: data });
+        (0, ad_model_1.requestAdminListModel)(req, res);
     });
 }
 exports.requestAdminList = requestAdminList;
