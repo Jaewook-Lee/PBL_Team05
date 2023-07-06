@@ -1,6 +1,7 @@
 import express, {Express, Request, Response} from "express";
 import adRoutes from './routes/ad'
 import testRouter from './routes/test'
+import cors from "cors"
 const port : Number = 8000;
 
 
@@ -10,6 +11,7 @@ app.use(express.static('.')) //url로 직접 사진에 접속할때 필요한 �
 app.use(express.json());
 app.use('/AD', adRoutes);
 app.use('/test',testRouter);
+app.use(cors());
 
 
 
