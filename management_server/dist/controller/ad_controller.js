@@ -15,13 +15,24 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.requestAdminList = exports.requestList = exports.uploadContents = exports.updateAd = exports.activeAd = exports.createAd = exports.readAd = exports.deleteAd = void 0;
 const mysql_1 = __importDefault(require("mysql"));
 const iso_3166_1_1 = __importDefault(require("iso-3166-1"));
+const dotenv_1 = __importDefault(require("dotenv"));
+const path_1 = __importDefault(require("path"));
+// 환경 변수가 저장된 .env 파일 로딩
+// 실패하면 에러 반환
+const result = dotenv_1.default.config({ path: path_1.default.join(__dirname, "../..", ".env") });
+if (result.parsed === undefined) {
+    throw new Error("Can't load env file!");
+}
+else {
+    console.log("Load env file complete");
+}
 //db connector
 const connection = mysql_1.default.createConnection({
-    host: 'ls-9c7d7b612085a406360965e6158e47d7564a40d7.c8heglnxvydw.ap-northeast-2.rds.amazonaws.com',
-    port: 3306,
-    user: 'dbmasteruser',
-    password: '00000000',
-    database: 'ad_management_platform_server'
+    host: process.env.MYSQL_HOST,
+    port: Number(process.env.MYSQL_PORT),
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PW,
+    database: process.env.MYSQL_DB_NAME
 });
 connection.connect((error) => {
     if (error) {

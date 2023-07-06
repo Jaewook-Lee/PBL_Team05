@@ -1,7 +1,7 @@
 import express, {Express, Request, Response} from "express";
 import adRoutes from './routes/ad'
 import testRouter from './routes/test'
-import cors from "cors"
+import picRouter from './routes/pic'
 const port : Number = 8000;
 
 
@@ -11,15 +11,15 @@ app.use(express.static('.')) //url로 직접 사진에 접속할때 필요한 �
 app.use(express.json());
 app.use('/AD', adRoutes);
 app.use('/test',testRouter);
-app.use(cors());
+app.use('/', picRouter);
 
 
 
 // 사진보내기 테스트 겸 기본화면
-app.get('/',(req : Request, res : Response)=>{
-    const photoPath : string = 'pic1.jpeg';
-    res.sendFile(photoPath, {root : './'}); // root 잘 확인해야될듯
-});
+// app.get('/',(req : Request, res : Response)=>{
+//     const photoPath : string = 'pic1.jpeg';
+//     res.sendFile(photoPath, {root : './'}); // root 잘 확인해야될듯
+// });
 
 
 
