@@ -1,8 +1,11 @@
 import { AdListView } from "./AdListView";
+import { DetailPanelView } from "./DetailPanelView";
 import css from "./index.css";
 css;
 
-const adListView = new AdListView();
+const detailPanelView = new DetailPanelView();
+
+const adListView = new AdListView(detailPanelView);
 adListView.initialize();
 
 // ADDTest 눌렀을때

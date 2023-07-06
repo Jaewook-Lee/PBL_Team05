@@ -1,6 +1,9 @@
+import { DetailPanelView } from "./DetailPanelView";
 import { AdminAdList, Fetch } from "./Fetch";
 
 export class AdListView {
+    private readonly _detailPanelView: DetailPanelView;
+
     private _table: HTMLTableElement;
     private _prototypeRow: HTMLDivElement;
 
@@ -15,7 +18,11 @@ export class AdListView {
     // private _currentPageIndex: number;
     // private _navigationOffset: number;
 
-    public constructor() {
+    public constructor(
+        detailPanelView: DetailPanelView
+    ) {
+        this._detailPanelView = detailPanelView;
+        
         const table = this._table = document.getElementById("big_table") as HTMLTableElement;
         this._prototypeRow = table.children[1].children[0] as HTMLDivElement;
         
@@ -85,7 +92,7 @@ export class AdListView {
         newRow.children[1].textContent = adData.name;
         newRow.children[2].textContent = `${adData.periodBegin} ~ ${adData.periodEnd}`;
         newRow.children[3].textContent = adData.maxViewCount.toString();
-        newRow.children[4].textContent = adData.createdAt;
+        newRow.children[4].textContent = adData.createAt;
 
         const itemControls = newRow.children[5];
         (itemControls.children[0] as HTMLButtonElement).onclick = () =>
@@ -100,12 +107,15 @@ export class AdListView {
         
 
     public async openDetailPanel(adId: number): Promise<void> {
-        adId;
-        this._detailPanel.style.display= 'flex';
+        this._detailPanel.style.display= "flex";
+
+        const adInfo = await Fetch.readAd(adId);
+        this._detailPanelView.showDetailPanel();
+        this._detailPanelView.detailText = JSON.stringify(adInfo, null, 4);
     }
 
     public closeDetailPanel(): void {
-        this._deletePanel.style.display = 'none';
+        this._deletePanel.style.display = "none";
     }
 
     public async openEditPanel(adId: number): Promise<void> {

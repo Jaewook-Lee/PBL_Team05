@@ -11,7 +11,7 @@ export interface AdminAdList {
         isActive: 1 | 0,
         adId: number,
         name: string,
-        createdAt: string, // yyyy-mm-dd hh:mm:ss
+        createAt: string, // yyyy-mm-dd hh:mm:ss
         periodBegin: string, // yyyy-mm-dd hh:mm:ss
         periodEnd: string, // yyyy-mm-dd hh:mm:ss
         maxViewCount: number
@@ -58,6 +58,17 @@ export type DeactiveAdResult = GenericResponse;
 
 export type UploadContentsResult = GenericResponse;
 
+export type ReadAdResult = {
+    adName: string,
+    contents: string,
+    period: string,
+    unitPrice: string,
+    advertiser: string,
+    language: string,
+    adType: string,
+    hitCount: number,
+    watchTimeSum: number
+};
 
 export class Fetch {
     private static readonly _entry = "http://13.125.111.160:8000";
@@ -167,8 +178,15 @@ export class Fetch {
         return response.json();
     }
 
-    public static async readAd(): Promise<void> {
+    public static async readAd(adId: number): Promise<ReadAdResult> {
+        const query = new URLSearchParams({
+            adId: adId.toString()
+        });
+        const response = await fetch(`${this._entry}/AD/readAd?${query}`, {
+            method: "GET"
+        });
 
+        return response.json();
     }
 
     public static async updateAd(params: Partial<CreateAdParams>, adId: number): Promise<CreateAdResult> {
