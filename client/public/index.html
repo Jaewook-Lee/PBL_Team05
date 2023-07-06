@@ -59,9 +59,9 @@
             <td>1000</td>
             <td>2023/05/05 12:00:00</td>
             <td>
-              <sl-button size="small">상세</sl-button>
+              <sl-button class = "detail" size="small">상세</sl-button>
               <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button size="small">삭제</sl-button>
+              <sl-button class = "delete" size="small">삭제</sl-button>
             </td>
             <td>O</td>
           </tr>
@@ -74,9 +74,9 @@
             <td>1000</td>
             <td>2023/05/05 12:00:00</td>
             <td>
-              <sl-button size="small">상세</sl-button>
+              <sl-button class = "detail"size="small">상세</sl-button>
               <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button size="small">삭제</sl-button>
+              <sl-button class = "delete" size="small">삭제</sl-button>
             </td>
             <td>O</td>
           </tr>
@@ -89,9 +89,9 @@
             <td>1500</td>
             <td>2023/05/05 12:00:00</td>
             <td>
-              <sl-button size="small">상세</sl-button>
+              <sl-button class = "detail" size="small">상세</sl-button>
               <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button size="small">삭제</sl-button>
+              <sl-button class = "delete" size="small">삭제</sl-button>
             </td>
             <td>O</td>
           </tr>
@@ -104,9 +104,9 @@
             <td>5000</td>
             <td>2023/05/05 12:00:00</td>
             <td>
-              <sl-button size="small">상세</sl-button>
+              <sl-button class = "detail" size="small">상세</sl-button>
               <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button size="small">삭제</sl-button>
+              <sl-button class = "delete" size="small">삭제</sl-button>
             </td>
             <td>O</td>
           </tr>
@@ -119,9 +119,9 @@
             <td>3000</td>
             <td>2023/05/05 12:00:00</td>
             <td>
-              <sl-button size="small">상세</sl-button>
+              <sl-button class = "detail"size="small">상세</sl-button>
               <sl-button class="edit" size="small">수정</sl-button>
-              <sl-button size="small">삭제</sl-button>
+              <sl-button class = "delete" size="small">삭제</sl-button>
             </td>
             <td>X</td>
           </tr>
@@ -130,8 +130,7 @@
     </table>
 
     <div id="page_navigation">
-      <a href="">
-        <<< /a>
+      <a href=""><<</a>
           <a href="">1</a>
           <a href="">2</a>
           <a href="">3</a>
@@ -214,6 +213,20 @@
       </div>
     </div>
   </div>
+  <!-- 상세 누르면 나오는 창 -->
+
+  <div id = "when_click_detail">
+      <div id = "clicked_detail">
+        <b>API Result Json String</b>
+        <sl-textarea rows="12" cols="50" id = click_detail_textarea></sl-textarea>
+        <div id="list_detail_okcancel_button">
+        <sl-button id="list_detail_cancel_button" variant="success" size="small">취소</sl-button>
+        <sl-button id="list_detail_ok_button" variant="success" size="small">확인</sl-button>
+      </div>
+    </div>
+  </div>
+
+
 
   <!-- 수정 누르면 나오는 창  -->
   <div id="when_click_edit">
@@ -243,7 +256,7 @@
         <sl-textarea></sl-textarea>
       </div>
       <div>
-        Count
+        Cou nt
         <sl-input></sl-input>
       </div>
       <div id="list_edit_okcancel_button">
@@ -252,7 +265,21 @@
       </div>
     </div>
   </div>
+
+  <!-- 삭제를 눌렀을때 -->
+  <div id = "when_click_delete">
+    <div id = "click_delete">
+        <div id = "delete_white_screen">
+          <b>삭제하시겠습니까?</b>
+        </div>
+        <div id = "list_delete_okcancel_button">
+          <sl-button id="list_delete_cancel_button" variant="success" size="small">취소</sl-button>
+          <sl-button id="list_delete_ok_button" variant="success" size="small">확인</sl-button>
+        </div>
+    </div> 
   </div>
+
+
 </body>
 
 </html>

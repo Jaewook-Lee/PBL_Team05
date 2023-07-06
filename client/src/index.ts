@@ -29,11 +29,28 @@ const addPopupCloseButton = document.getElementById("ADD_cancel_button") as HTML
 addPopupCloseButton.onclick = () => {
     addPopup.style.display = 'none';
 };
+//상세 눌렀을때
+const deailPanel = document.getElementById("when_click_detail") as HTMLDivElement;
+
+const detailPopupCloseButton = document.getElementById("list_detail_cancel_button") as HTMLDivElement;
+detailPopupCloseButton.onclick = () => {
+    deailPanel.style.display = 'none'
+}
 
 
+//수정 눌렀을때
 const editPanel = document.getElementById("when_click_edit") as HTMLDivElement;
 
 const editPopupCloseButton = document.getElementById("list_edit_cancel_button") as HTMLButtonElement;
 editPopupCloseButton.onclick = () => {
     editPanel.style.display = 'none';
 };
+
+//삭제 눌렀을때 
+const deletePanel = document.getElementById("when_click_delete") as HTMLDivElement;
+
+const deletePopupCloseButton = document.getElementById("list_delete_cancel_button") as HTMLButtonElement;
+deletePopupCloseButton.onclick = () => {
+    deletePanel.style.display = 'none';
+};
+

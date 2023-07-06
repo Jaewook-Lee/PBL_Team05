@@ -7,6 +7,8 @@ export class AdListView {
     private _pageNavigation: HTMLDivElement;
 
     private _editPanel: HTMLDivElement;
+    private _deletePanel: HTMLDivElement;
+    private _detailPanel: HTMLDivElement;
 
     private _pageItemCount: number;
 
@@ -18,8 +20,9 @@ export class AdListView {
         this._prototypeRow = table.children[1].children[0] as HTMLDivElement;
         
         this._pageNavigation = document.getElementById("page_navigation") as HTMLDivElement;
-
+        this._detailPanel = document.getElementById("when_click_detail") as HTMLDivElement;
         this._editPanel = document.getElementById("when_click_edit") as HTMLDivElement;
+        this._deletePanel = document.getElementById("when_click_delete") as HTMLDivElement;
 
         for (const tBody of table.tBodies) {
             table.removeChild(tBody);
@@ -90,7 +93,7 @@ export class AdListView {
         (itemControls.children[1] as HTMLButtonElement).onclick = () =>
             this.openEditPanel(adData.adId);
         (itemControls.children[2] as HTMLButtonElement).onclick = () =>
-            Fetch.deleteAd(adData.adId);
+            this.openDeletePanel(adData.adId);
 
         return newRow;
     }
@@ -98,10 +101,11 @@ export class AdListView {
 
     public async openDetailPanel(adId: number): Promise<void> {
         adId;
+        this._detailPanel.style.display= 'flex';
     }
 
     public closeDetailPanel(): void {
-
+        this._deletePanel.style.display = 'none';
     }
 
     public async openEditPanel(adId: number): Promise<void> {
@@ -111,5 +115,14 @@ export class AdListView {
 
     public closeEditPanel(): void {
         this._editPanel.style.display = "none";
+    }
+
+    public openDeletePanel(adId: number): void {
+        adId;   
+        this._deletePanel.style.display = "flex";
+    }
+
+    public closeDeletePanel() : void {
+        this._deletePanel.style.display = 'none';
     }
 }
