@@ -235,7 +235,39 @@ body {
     margin-right: 10px;
     margin-left: 10px;
 }
+/* 상세 눌렀을때 */
 
+#when_click_detail{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    background-color: rgba(0, 0, 0, 0.7);
+
+    display: none;
+    
+}
+
+#clicked_detail{
+    background-color: blue;
+    width: 350px;
+    height: 440px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
+}
 
 /* 수정 눌렀을때 */
 #when_click_edit {
@@ -270,4 +302,50 @@ body {
 
 #list_in_dropdown{
     width : 250px;
+}
+
+
+/* 삭제를 눌렀을때 */
+#when_click_delete {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+
+    background-color: rgba(0, 0, 0, 0.7);
+    
+    display: none;
+}
+
+#delete_white_screen{
+    background-color: white;
+    width: 300px;
+    height: 100px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-between;
+}
+
+
+#click_delete{
+    background-color: blue;
+    width: 350px;
+    height: 200px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    justify-content: space-around;
 }
