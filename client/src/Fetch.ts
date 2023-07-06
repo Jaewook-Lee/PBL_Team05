@@ -124,6 +124,9 @@ export class Fetch {
     public static async deleteAd(adId: number): Promise<DeleteAdResult> {
         const response = await fetch(`${this._entry}/AD/deleteAd`, {
             method: "DELETE",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId
             })
@@ -135,6 +138,9 @@ export class Fetch {
     public static async createAd(params: CreateAdParams): Promise<CreateAdResult> {
         const response = await fetch(`${this._entry}/AD/createAd`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(params)
         });
 
@@ -144,6 +150,9 @@ export class Fetch {
     public static async activeAd(adId: number): Promise<ActiveAdResult> {
         const response = await fetch(`${this._entry}/AD/activeAd`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId
             })
@@ -155,6 +164,9 @@ export class Fetch {
     public static async deactiveAd(adId: number): Promise<DeactiveAdResult> {
         const response = await fetch(`${this._entry}/AD/deactiveAd`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId
             })
@@ -169,6 +181,9 @@ export class Fetch {
     ): Promise<UploadContentsResult> {
         const response = await fetch(`${this._entry}/AD/uploadContents`, {
             method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId,
                 contents: contents
@@ -192,6 +207,9 @@ export class Fetch {
     public static async updateAd(params: Partial<CreateAdParams>, adId: number): Promise<CreateAdResult> {
         const response = await fetch(`${this._entry}/AD/updateAd`, {
             method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify(
                 adId ? {
                     adId: adId,
@@ -208,6 +226,9 @@ export class Fetch {
     ): Promise<void> {
         const response = await fetch(`${this._entry}/AD/collectHit`, {
             method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId
             })
@@ -222,6 +243,9 @@ export class Fetch {
     ): Promise<void> {
         const response = await fetch(`${this._entry}/AD/collectWatchTime`, {
             method: "PUT",
+            headers: {
+                "Content-Type": "application/json"
+            },
             body: JSON.stringify({
                 adId: adId,
                 watchTime: watchTime

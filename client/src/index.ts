@@ -1,8 +1,21 @@
 import { AdListView } from "./AdListView";
+<<<<<<< HEAD
 import css from "./index.css";
 css;
 
 const adListView = new AdListView();
+=======
+import { DeletePanelView } from "./DeletePanelVIew";
+import { DetailPanelView } from "./DetailPanelView";
+import { EditPanelView } from "./EditPanelView";
+import css from "./index.css";
+css;
+
+const detailPanelView = new DetailPanelView();
+const editPanelView = new EditPanelView();
+const deletePanelView = new DeletePanelView();
+const adListView = new AdListView(detailPanelView, editPanelView, deletePanelView);
+>>>>>>> refs/remotes/origin/main
 adListView.initialize();
 
 // ADDTest 눌렀을때
@@ -17,18 +30,20 @@ const adTestPopupCloseButton = document.getElementById("ADDTEST_ok_button") as H
 adTestPopupCloseButton.onclick = () => {
     adTestPopup.style.display = "none";
 };
+
 // ADD 눌렀을때
 const addButton = document.getElementById("ADD") as HTMLButtonElement;
 const addPopup = document.getElementById("when_click_ADD") as HTMLDivElement;
 
 addButton.onclick = () => {
-    addPopup.style.display = 'flex';
+    addPopup.style.display = "flex";
 };
 
 const addPopupCloseButton = document.getElementById("ADD_cancel_button") as HTMLButtonElement;
 addPopupCloseButton.onclick = () => {
-    addPopup.style.display = 'none';
+    addPopup.style.display = "none";
 };
+<<<<<<< HEAD
 //상세 눌렀을때
 const deailPanel = document.getElementById("when_click_detail") as HTMLDivElement;
 
@@ -55,3 +70,5 @@ deletePopupCloseButton.onclick = () => {
 };
 
 //webview 눌렀을때
+=======
+>>>>>>> refs/remotes/origin/main

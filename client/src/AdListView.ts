@@ -1,44 +1,49 @@
+import { DeletePanelView } from "./DeletePanelVIew";
 import { DetailPanelView } from "./DetailPanelView";
+import { EditPanelView } from "./EditPanelView";
 import { AdminAdList, Fetch } from "./Fetch";
 
 export class AdListView {
     private readonly _detailPanelView: DetailPanelView;
+    private readonly _editPanelView: EditPanelView;
+    private readonly _deletePanelView: DeletePanelView;
 
     private _table: HTMLTableElement;
     private _prototypeRow: HTMLDivElement;
 
     private _pageNavigation: HTMLDivElement;
 
-    private _editPanel: HTMLDivElement;
-    private _deletePanel: HTMLDivElement;
-    private _detailPanel: HTMLDivElement;
-
     private _pageItemCount: number;
 
-    // private _currentPageIndex: number;
+    private _currentPageIndex: number;
     // private _navigationOffset: number;
 
     public constructor(
-        detailPanelView: DetailPanelView
+        detailPanelView: DetailPanelView,
+        editPanelView: EditPanelView,
+        deletePanelView: DeletePanelView
     ) {
         this._detailPanelView = detailPanelView;
+        this._editPanelView = editPanelView;
+        this._deletePanelView = deletePanelView;
         
         const table = this._table = document.getElementById("big_table") as HTMLTableElement;
         this._prototypeRow = table.children[1].children[0] as HTMLDivElement;
         
         this._pageNavigation = document.getElementById("page_navigation") as HTMLDivElement;
-        this._detailPanel = document.getElementById("when_click_detail") as HTMLDivElement;
-        this._editPanel = document.getElementById("when_click_edit") as HTMLDivElement;
-        this._deletePanel = document.getElementById("when_click_delete") as HTMLDivElement;
-
+        
         for (const tBody of table.tBodies) {
             table.removeChild(tBody);
         }
 
         this._pageItemCount = 10;
 
-        // this._currentPageIndex = 0;
+        this._currentPageIndex = 0;
         // this._navigationOffset = 0;
+
+        this._deletePanelView.onDeleted = () => {
+            this.renderAdList(this._currentPageIndex);
+        };
     }
 
     public async initialize(): Promise<void> {
@@ -46,6 +51,7 @@ export class AdListView {
     }
 
     public async renderAdList(pageIndex: number): Promise<void> {
+        this._currentPageIndex = pageIndex;
         pageIndex -= 1;
         
         const adList = await Fetch.requestAdminList(
@@ -100,39 +106,30 @@ export class AdListView {
         (itemControls.children[1] as HTMLButtonElement).onclick = () =>
             this.openEditPanel(adData.adId);
         (itemControls.children[2] as HTMLButtonElement).onclick = () =>
-            this.openDeletePanel(adData.adId);
+            this.openDeletePanel(adData.adId, adData.name);
 
         return newRow;
     }
         
 
     public async openDetailPanel(adId: number): Promise<void> {
-        this._detailPanel.style.display= "flex";
-
         const adInfo = await Fetch.readAd(adId);
-        this._detailPanelView.showDetailPanel();
+        this._detailPanelView.showPanel();
         this._detailPanelView.detailText = JSON.stringify(adInfo, null, 4);
     }
 
-    public closeDetailPanel(): void {
-        this._deletePanel.style.display = "none";
-    }
-
     public async openEditPanel(adId: number): Promise<void> {
-        adId;
-        this._editPanel.style.display = "flex";
+        const adInfo = await Fetch.readAd(adId);
+        this._editPanelView.showPanel();
+        console.log(adInfo);
     }
 
-    public closeEditPanel(): void {
-        this._editPanel.style.display = "none";
-    }
+    public async openDeletePanel(adId: number, adName: string): Promise<void> {
+        const deletePanelView = this._deletePanelView;
+        deletePanelView.adId = adId;
+        deletePanelView.adName = adName;
 
-    public openDeletePanel(adId: number): void {
-        adId;   
-        this._deletePanel.style.display = "flex";
-    }
-
-    public closeDeletePanel() : void {
-        this._deletePanel.style.display = 'none';
+        deletePanelView.update();
+        deletePanelView.showPanel();
     }
 }
