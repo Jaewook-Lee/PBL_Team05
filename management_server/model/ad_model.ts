@@ -140,7 +140,7 @@ function activeModel(req: Request, res: Response){
     })
 }
 
-function updateAd(req: Request, res: Response){
+function updateAdModel(req: Request, res: Response){
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`,
         function(err : Error){
             if(err){
@@ -210,4 +210,4 @@ async function requestAdminListModel(req: Request, res: Response){
     
     res.json({adCount : count[0].adCount ,data : data!});
 }
-export {requestListModel,readAdModel,deleteAdModel,createAdModel,activeModel,updateAd,requestAdminListModel};
+export {requestListModel,readAdModel,deleteAdModel,createAdModel,activeModel,updateAdModel,requestAdminListModel};
