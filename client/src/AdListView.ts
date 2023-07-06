@@ -99,6 +99,7 @@ export class AdListView {
         newRow.children[2].textContent = `${adData.periodBegin} ~ ${adData.periodEnd}`;
         newRow.children[3].textContent = adData.maxViewCount.toString();
         newRow.children[4].textContent = adData.createAt;
+    
 
         const itemControls = newRow.children[5];
         (itemControls.children[0] as HTMLButtonElement).onclick = () =>
