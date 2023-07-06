@@ -12,7 +12,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.requestAdminListModel = exports.updateAd = exports.activeModel = exports.createAdModel = exports.deleteAdModel = exports.readAdModel = exports.requestListModel = void 0;
+exports.requestAdminListModel = exports.updateAdModel = exports.activeModel = exports.createAdModel = exports.deleteAdModel = exports.readAdModel = exports.requestListModel = void 0;
 const mysql_1 = __importDefault(require("mysql"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
@@ -148,7 +148,7 @@ function activeModel(req, res) {
     });
 }
 exports.activeModel = activeModel;
-function updateAd(req, res) {
+function updateAdModel(req, res) {
     connection.query(`update ads set name="${req.body.name}" ,advertizer="${req.body.advertizer}",create_at="${req.body.createdAt}",country="${req.body.country}",gender="${req.body.gender}",period_begin="${req.body.periodBegin}",period_end="${req.body.periodEnd}",max_view_count= "${req.body.maxViewCount}" where id = "${req.body.adId}"`, function (err) {
         if (err) {
             console.log(err);
@@ -165,7 +165,7 @@ function updateAd(req, res) {
         return;
     });
 }
-exports.updateAd = updateAd;
+exports.updateAdModel = updateAdModel;
 function requestAdminListModel(req, res) {
     return __awaiter(this, void 0, void 0, function* () {
         var offset = Number(req.query.offset);
