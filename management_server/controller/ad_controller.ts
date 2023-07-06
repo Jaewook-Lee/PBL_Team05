@@ -94,13 +94,6 @@ function readAd (req: Request, res: Response) {
 function deleteAd (req: Request, res: Response) {
     console.log(req.body);
     console.log(req);
-    if (req.body ={}){
-        res.json({
-            status: "fail",
-            message: "body가 비었습니다."
-        });
-        return;
-    };
     connection.query(`delete from ads where id = "${req.body.adId}"`,
         function(err : Error){
             if(err){
