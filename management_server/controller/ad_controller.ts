@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import iso from 'iso-3166-1';
-import { activeModel, createAdModel, deleteAdModel, readAdModel, requestAdminListModel, requestListModel } from '../model/ad_model';
+import { activeModel, createAdModel, deleteAdModel, readAdModel, requestAdminListModel, requestListModel, updateAdModel } from '../model/ad_model';
 
 
 // ad 정렬해서 filtering하는 기능이 필요 할 듯.
@@ -64,7 +64,7 @@ function activeAd (req: Request, res: Response) {
 //todo
 // api문서 및 구조 바꿔야 할 수도. 수정창에서 불러올때는 get 수정할때는 post,put 으로 동작하게 해야할 듯 함.
 function updateAd (req: Request, res: Response) {
-    updateAd(req,res);
+    updateAdModel(req,res);
 }
 
 // file을 받는 tool 필요할듯.
